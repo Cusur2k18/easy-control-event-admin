@@ -22,3 +22,12 @@ export default class Layout extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  
+})
+
+const mapDispatchToProps = {
+  
+}
+
