@@ -1,16 +1,19 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import { DasboardContainer, AuthContainer } from './containers';
+
 export default class AppRoutes extends React.Component {
 
   state = {
-    isLoggedIn: true
+    isLoggedIn: false
   }
 
   render() {
 
     let routes = (
       <Switch>
+        <Route path='/login' component={AuthContainer}/>
         <Redirect to="/login" />
       </Switch>
     )
