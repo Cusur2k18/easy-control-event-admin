@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { DasboardContainer, AuthContainer } from './containers';
+import { LogoutComponent } from './components';
 
 export class AppRoutes extends React.Component {
 
@@ -19,6 +20,7 @@ export class AppRoutes extends React.Component {
       routes = (
         <Switch>
           <Route exact path='/' component={DasboardContainer}/>
+          <Route path='/logout' component={LogoutComponent}/>
           <Redirect to="/" />
         </Switch>
       )

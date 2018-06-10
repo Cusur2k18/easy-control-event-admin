@@ -7,6 +7,7 @@ import FolderIcon from '@atlaskit/icon/glyph/folder';
 import PeopleIcon from '@atlaskit/icon/glyph/people';
 import Navigation, {
   AkContainerTitle,
+  AkNavigationItemGroup,
   AkContainerNavigationNested,
   presetThemes,
 } from '@atlaskit/navigation';
@@ -17,14 +18,22 @@ import * as config from '../../../utils/config';
 
 export default withRouter((props) => {
 
-  const sidemenu = [config.SideBarMenuItems.map( (item, i) => {
+  const sidemenu = [config.SideBarMenuItems.map( (menuItem, i) => {
+    const items = menuItem.items.map( subMenuItem => {
+      return (
+        <RouterLinkItem 
+          key={subMenuItem.id} 
+          to={subMenuItem.src}
+          isSelected={props.location.pathname === subMenuItem.src} 
+          text={subMenuItem.text}/>
+        )
+    })
     return (
-      <RouterLinkItem 
-        key={item.id} 
-        to={item.src}
-        isSelected={props.location.pathname === item.src} 
-        text={item.text}/>
-      )
+      <AkNavigationItemGroup key={menuItem.id} title={menuItem.title}>
+        {items}
+      </AkNavigationItemGroup>
+    )
+    
   })]
 
   return (
