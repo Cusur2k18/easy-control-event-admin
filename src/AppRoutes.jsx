@@ -1,13 +1,10 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { DasboardContainer, AuthContainer } from './containers';
 
-export default class AppRoutes extends React.Component {
-
-  state = {
-    isLoggedIn: false
-  }
+export class AppRoutes extends React.Component {
 
   render() {
 
@@ -18,7 +15,7 @@ export default class AppRoutes extends React.Component {
       </Switch>
     )
 
-    if (this.state.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       routes = (
         <Switch>
           <Route exact path='/' component={DasboardContainer}/>
@@ -34,3 +31,10 @@ export default class AppRoutes extends React.Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn
+})
+
+export default withRouter(connect(mapStateToProps, null)(AppRoutes));
