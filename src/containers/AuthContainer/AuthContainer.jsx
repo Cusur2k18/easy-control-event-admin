@@ -1,11 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
+import Spinner from '@atlaskit/spinner';
 import './AuthContainer.scss';
 import headerImg from '../../assets/header.png';
 
-export default class AuthContainer extends React.Component {
+export class AuthContainer extends React.Component {
 
   render() {
+
+    let action =  <button type="submit" className="btn btn-outline-primary login-submit">Entrar</button>
+    if (this.props.isLoggingIn) {
+      action = <Spinner size="large"/>
+    }
 
     return (
       <React.Fragment>
@@ -19,17 +27,17 @@ export default class AuthContainer extends React.Component {
                 <div className="form-group mt-2">
                   <div className="col-sm-12 col-md-12">
                     <label >Username</label>
-                    <input type="email" className="form-control" placeholder="Username" />
+                    <input type="email" className="form-control" placeholder="Username" disabled={this.props.isLoggingIn}/>
                   </div>
                 </div>
                 <div className="form-group mt-2">
                   <div className="col-sm-12 col-md-12">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Password" />
+                    <input type="password" className="form-control" placeholder="Password" disabled={this.props.isLoggingIn}/>
                   </div>
                 </div>
                 <div className="text-center form-group mt-5">
-                  <button type="submit" className="btn btn-outline-primary login-submit">Entrar</button> 
+                  {action}
                 </div>
               </form>
             </div>
@@ -39,3 +47,8 @@ export default class AuthContainer extends React.Component {
     )
   }
 }
+const mapStateToProps = (state) => ({
+  isLoggingIn: state.auth.isLoggingIn  
+})
+
+export default withRouter(connect(mapStateToProps, null)(AuthContainer));
