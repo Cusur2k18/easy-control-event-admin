@@ -2,8 +2,12 @@ import React from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { DasboardContainer, AuthContainer } from './containers';
-import { LogoutComponent } from './components';
+import { 
+  DasboardContainer, 
+  AuthContainer, 
+  EventsContainer 
+} from './containers';
+import { LogoutComponent, PrivateRoute } from './components';
 
 export class AppRoutes extends React.Component {
 
@@ -11,20 +15,13 @@ export class AppRoutes extends React.Component {
 
     let routes = (
       <Switch>
-        <Route path='/login' component={AuthContainer}/>
-        <Redirect to="/login" />
+        <PrivateRoute exact authed={this.props.isLoggedIn} path="/" component={DasboardContainer} />
+        <PrivateRoute authed={this.props.isLoggedIn} path="/my-events" component={EventsContainer} />
+        <Route path="/login" component={AuthContainer}/>
+        <Route path="/logout" component={LogoutComponent}/>
+        <Redirect to="/" />
       </Switch>
     )
-
-    if (this.props.isLoggedIn) {
-      routes = (
-        <Switch>
-          <Route exact path='/' component={DasboardContainer}/>
-          <Route path='/logout' component={LogoutComponent}/>
-          <Redirect to="/" />
-        </Switch>
-      )
-    }
 
     return (
       <React.Fragment>

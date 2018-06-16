@@ -1,10 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import DiscoverIcon from '@atlaskit/icon/glyph/discover';
-import TrayIcon from '@atlaskit/icon/glyph/tray';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import PeopleIcon from '@atlaskit/icon/glyph/people';
 import Navigation, {
   AkContainerTitle,
   AkNavigationItemGroup,
@@ -42,7 +38,7 @@ export default withRouter((props) => {
       containerTheme={presetThemes.dark}
       globalPrimaryItemHref="/"
       globalPrimaryIcon={
-        <img src={Logo} width="30" height="35" />
+        <img src={Logo} width="30" height="35" alt="Username" />
       }
       containerHeaderComponent={() => (
         <AkContainerTitle

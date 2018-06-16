@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import * as authActions from '../../store/actions';
 
@@ -69,6 +69,10 @@ export class AuthContainer extends React.Component {
       )
     }
 
+    if (this.props.isLoggedIn) {
+      return <Redirect to="/" />;
+    }
+    
     return (
       <React.Fragment>
         <div className="top-bar text-center">
@@ -104,6 +108,7 @@ export class AuthContainer extends React.Component {
 }
 const mapStateToProps = (state) => ({
   isLoggingIn: state.auth.isLoggingIn,
+  isLoggedIn: state.auth.isLoggedIn,
   error: state.auth.loginError
 })
 

@@ -1,23 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page from '@atlaskit/page';
 
 import { SidebarComponent } from '../../components/';
 
 export class Layout extends React.Component {
 
   render() {
-    let navigation = null;
+    let navigation = null,
+        styleClasses = ['container-fluid','app-container', 'no-margin',  'mb-5']
 
     if (this.props.isLoggedIn) {
       navigation = <SidebarComponent />;
+      styleClasses = ['container-fluid','app-container', 'mb-5']
     }
 
     return (
       <div className="main-container">
         <Page navigation={navigation} >
-          <div className="container-fluid">
+          <div className={styleClasses.join(' ')}>
             {this.props.children}
           </div>
         </Page>

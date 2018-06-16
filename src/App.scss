@@ -4,6 +4,9 @@ body {
 
 .app-container {
   margin-top: 3rem;
+  &.no-margin {
+    margin-top: 0;
+  }
 }
 
 .borderless {
