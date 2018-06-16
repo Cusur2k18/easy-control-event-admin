@@ -6,6 +6,20 @@ $card-top-color-3: #2690AF;
 #dashboard {
 
   .card {
+    width: 100%;
+
+    .card-body {
+      padding-bottom: 0;
+
+      table {
+        tr {
+          
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
 
     &:before {
       content: '';
@@ -19,20 +33,31 @@ $card-top-color-3: #2690AF;
     &.orange {
 
       &:before {
-      background: $card-top-color-1;
+        background: $card-top-color-1;
       }
     }
     &.green {
 
       &:before {
-      background: $card-top-color-2;
+        background: $card-top-color-2;
       }
     }
     &.blue {
 
       &:before {
-      background: $card-top-color-3;
+        background: $card-top-color-3;
+      }
+    }
 
+    .calendar {
+      height: 40rem;
+
+      .rbc-day-bg {
+
+        &:hover {
+          background: #eeee;
+          cursor: pointer;
+        }
       }
     }
   }
