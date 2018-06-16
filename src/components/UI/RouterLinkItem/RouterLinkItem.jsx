@@ -11,5 +11,6 @@ export default (props) => {
       isSelected={props.isSelected}
       linkComponent={RouterLinkComponent}
       text={props.text}
+      icon={props.icon}
     />)
 }
