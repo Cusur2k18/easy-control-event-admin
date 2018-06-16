@@ -1,3 +1,13 @@
 body {
   background-color: #F2F3F5;
 }
+
+.app-container {
+  margin-top: 3rem;
+}
+
+.borderless {
+  td, th {
+    border-top: none;
+  }
+}
