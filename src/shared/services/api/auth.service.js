@@ -1,4 +1,5 @@
 import api from '../../axios-api';
+import { parseRequest } from '../../../utils';
 
 export class AuthService {
 
@@ -10,7 +11,7 @@ export class AuthService {
     }
 
     return api.post(url, credentials)
-      .then( response => response)
-      .catch( error => error);
+      .then( response => parseRequest(response) )
+      .catch( error => parseRequest(error) );
   }
 }

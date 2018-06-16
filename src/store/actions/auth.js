@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import * as authTypes from './actionTypes';
 import { AuthService } from '../../shared/services';
 
@@ -28,26 +29,56 @@ export const login = (username, password, includeUser=true) => {
 
     const credentials = {
       username,
-      password
+      password,
+      ttl: 86400 // token valid up to 1 day.
     }
 
     AuthService.login(credentials, includeUser)
       .then( res => {
+        console.log(res);
         if (res.status === 200) {
+          const userData = {
+            id: res.data.user.id,
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            mLastName: res.data.user.mLastName,
+          }
 
           localStorage.setItem('token', res.data.id);
+          localStorage.setItem('expiration', res.data.ttl);  // this value is in seconds
+          localStorage.setItem('user', JSON.stringify(userData));
           dispatch(loginSuccess(res.data.user));
-        } else {
+        } else if (res.status === 401) {
 
-          dispatch(loginFail('Usuario y contraseña no validos!'));
+          dispatch(loginFail('Usuario o contraseña no validos!'));
         }
       })
       .catch( err => {
 
-        dispatch(loginFail('Usuario y contraseña no validos!'));
+        dispatch(loginFail('Problemas con tu incio sesion! Contacta a un administrador'));
       })
 
 
+  }
+}
+
+export const autoSignIn = () => {
+  return dispatch => {
+
+    if (!localStorage.getItem('token')) {
+      dispatch(logout());
+    } else {
+      const expirationDate = moment().add(localStorage.getItem('expiration'), 's');
+
+      if (expirationDate > moment()) {
+        const userData = JSON.parse(localStorage.getItem('user'));
+
+        dispatch(loginSuccess(userData))
+      } else {
+
+        dispatch(logout());
+      }
+    }
   }
 }
 
