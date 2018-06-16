@@ -6,7 +6,9 @@ export default (props) => {
 
   if (props.hoverable) {
     classes.push('table-hover')
-  } else if (props.borderless) {
+  } 
+  
+  if (props.borderless) {
     classes.push('borderless')    
   }
 

@@ -10,15 +10,6 @@ $card-top-color-3: #2690AF;
 
     .card-body {
       padding-bottom: 0;
-
-      table {
-        tr {
-          
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
     }
 
     &:before {

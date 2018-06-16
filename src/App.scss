@@ -14,3 +14,13 @@ body {
     border-top: none;
   }
 }
+
+.table-hover {
+  
+  tr {
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
