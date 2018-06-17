@@ -24,31 +24,31 @@ export default (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr onClick={() => props.click(1)}>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
-          <tr>
+          <tr onClick={() => props.click(2)}>
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
             <td>@fat</td>
           </tr>
-          <tr>
+          <tr onClick={() => props.click(3)}>
             <th scope="row">3</th>
             <td>Larry</td>
             <td>the Bird</td>
             <td>@twitter</td>
           </tr>
-          <tr>
+          <tr onClick={() => props.click(4)}>
             <th scope="row">4</th>
             <td>Larry</td>
             <td>the Bird</td>
             <td>@twitter</td>
           </tr>
-          <tr>
+          <tr onClick={() => props.click(5)}>
             <th scope="row">5</th>
             <td>Larry</td>
             <td>the Bird</td>

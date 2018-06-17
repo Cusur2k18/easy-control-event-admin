@@ -17,9 +17,10 @@ export class AppRoutes extends React.Component {
       <Switch>
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/" component={DasboardContainer} />
         <PrivateRoute authed={this.props.isLoggedIn} path="/my-events" component={EventsContainer} />
+        <PrivateRoute authed={this.props.isLoggedIn} path="/events/:id" component={EventsContainer} />
         <Route path="/login" component={AuthContainer}/>
         <Route path="/logout" component={LogoutComponent}/>
-        <Redirect to="/" />
+        <Redirect to="/events/12" />
       </Switch>
     )
 

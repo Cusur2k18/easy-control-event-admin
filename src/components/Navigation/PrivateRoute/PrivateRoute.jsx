@@ -9,7 +9,7 @@ export default withRouter(({component: Component, authed, ...rest}) => {
       {...rest}
       render={(props) => authed 
         ? <Component {...props} />
-        : <Redirect to="/login" />}
+        : <Redirect to="/events/234" />}
     />
   )
 })

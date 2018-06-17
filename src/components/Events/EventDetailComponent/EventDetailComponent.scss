@@ -1,0 +1,53 @@
+.event-detail {
+
+  .description-event {
+    text-align: justify;
+  }
+
+  .schedule-list-item {
+    padding: 1rem 0;
+    font-size: 14px;
+
+    .bVjSyZ {  // For the atlassian dot icon
+      line-height: 2;
+    }
+
+  }
+
+  .list-row {
+    display: block;
+    padding: 1rem 0;
+
+    .list-item {
+
+      padding-left: 0;
+
+      li {
+        display: inline-block;
+        width: 49%;
+        padding: 0 1rem;
+      }
+
+      .item-prop {
+        width: 30%;
+        text-transform: uppercase;
+        font-size: 15px;
+        text-align: right;
+      }
+    }
+
+    .users-for-event {
+
+      .user-item {
+        display: inline-block;
+        transition: .3s;
+        border-radius: 50%;
+        cursor: pointer;      
+
+        &:hover {
+          box-shadow: 0 0 10px black;
+        }
+      }
+    }
+  }
+}
