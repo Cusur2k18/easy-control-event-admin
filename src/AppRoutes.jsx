@@ -6,7 +6,8 @@ import {
   DasboardContainer, 
   AuthContainer, 
   EventsContainer,
-  AdminContainer
+  AdminContainer,
+  AccountContainer
 } from './containers';
 import { LogoutComponent, PrivateRoute } from './components';
 
@@ -18,11 +19,12 @@ export class AppRoutes extends React.Component {
       <Switch>
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/" component={DasboardContainer} />
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/admin" component={AdminContainer} />
+        <PrivateRoute exact authed={this.props.isLoggedIn} path="/account" component={AccountContainer} />
         <PrivateRoute authed={this.props.isLoggedIn} path="/my-events" component={EventsContainer} />
         <PrivateRoute authed={this.props.isLoggedIn} path="/events/:id" component={EventsContainer} />
         <Route path="/login" component={AuthContainer}/>
         <Route path="/logout" component={LogoutComponent}/>
-        <Redirect to="/admin" />
+        <Redirect to="/account" />
       </Switch>
     )
 
