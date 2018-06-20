@@ -45,7 +45,7 @@ export const login = (username, password, includeUser=true) => {
           }
 
           localStorage.setItem('token', res.data.id);
-          localStorage.setItem('expiration', res.data.ttl);  // this value is in seconds
+          localStorage.setItem('expiration', moment().add(res.data.ttl, 's').format());
           localStorage.setItem('user', JSON.stringify(userData));
           dispatch(loginSuccess(res.data.user));
         } else if (res.status === 401) {
@@ -66,16 +66,17 @@ export const autoSignIn = () => {
   return dispatch => {
 
     if (!localStorage.getItem('token')) {
+      localStorage.clear();
       dispatch(logout());
     } else {
-      const expirationDate = moment().add(localStorage.getItem('expiration'), 's').format();
-      
+      const expirationDate = localStorage.getItem('expiration');
+
       if (moment(expirationDate).isAfter()) {
         const userData = JSON.parse(localStorage.getItem('user'));
 
         dispatch(loginSuccess(userData))
       } else {
-
+        localStorage.clear();
         dispatch(logout());
       }
     }
