@@ -92,12 +92,6 @@ export default (props) => {
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <p>Descarga el codigo QR de este evento</p>
-                    <button type="button" className="btn btn-primary btn-block">
-                      <QRICon size="small" /> Descargar
-                    </button>
-                  </div>
                 </div>
               </div>
 
