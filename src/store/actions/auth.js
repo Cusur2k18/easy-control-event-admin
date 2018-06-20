@@ -30,7 +30,7 @@ export const login = (username, password, includeUser=true) => {
     const credentials = {
       username,
       password,
-      ttl: 10 //86400  token valid up to 1 day.
+      ttl: 86400 //86400  token valid up to 1 day.
     }
 
     AuthService.login(credentials, includeUser)
