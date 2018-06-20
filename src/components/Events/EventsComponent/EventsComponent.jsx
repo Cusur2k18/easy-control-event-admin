@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TableComponent from '../../UI/TableComponent/TableComponent';
-import GridViewComponent from '../../UI/GridViewComponent/GridViewComponent';
+import CardComponent from '../../UI/CardComponent/CardComponent';
 
 export default (props) => {
 
@@ -17,7 +17,7 @@ export default (props) => {
   )
 
   if (props.activeView === 'grid') {
-    contentView = <GridViewComponent elements="5"/>
+    contentView = <CardComponent elements="5"/>
   }
 
   return contentView

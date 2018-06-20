@@ -30,7 +30,7 @@ export const login = (username, password, includeUser=true) => {
     const credentials = {
       username,
       password,
-      ttl: 86400 // token valid up to 1 day.
+      ttl: 10 //86400  token valid up to 1 day.
     }
 
     AuthService.login(credentials, includeUser)
@@ -68,9 +68,9 @@ export const autoSignIn = () => {
     if (!localStorage.getItem('token')) {
       dispatch(logout());
     } else {
-      const expirationDate = moment().add(localStorage.getItem('expiration'), 's');
-
-      if (expirationDate > moment()) {
+      const expirationDate = moment().add(localStorage.getItem('expiration'), 's').format();
+      
+      if (moment(expirationDate).isAfter()) {
         const userData = JSON.parse(localStorage.getItem('user'));
 
         dispatch(loginSuccess(userData))

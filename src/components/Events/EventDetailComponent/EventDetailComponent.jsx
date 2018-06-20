@@ -4,7 +4,6 @@ import * as moment from 'moment';
 
 import LocationIcon from '@atlaskit/icon/glyph/location';
 import ClockIcon from '@atlaskit/icon/glyph/emoji/frequent';
-import QRICon from '@atlaskit/icon/glyph/jira/capture';
 import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import ActiveIcon from '@atlaskit/icon/glyph/presence-active';
 import Tooltip from '@atlaskit/tooltip';

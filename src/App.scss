@@ -2,6 +2,23 @@ body {
   background-color: #F2F3F5;
 }
 
+.main-container {
+
+  overflow: hidden;
+  
+  .footer {
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    left: 10rem;
+    right: 0;
+    width: 100%;
+    i {
+      color: #b3b3b3;
+    }
+  }
+}
+
 .app-container {
   margin-top: 3rem;
   &.no-margin {

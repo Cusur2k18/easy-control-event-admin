@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { 
   DasboardContainer, 
   AuthContainer, 
-  EventsContainer 
+  EventsContainer,
+  AdminContainer
 } from './containers';
 import { LogoutComponent, PrivateRoute } from './components';
 
@@ -16,11 +17,12 @@ export class AppRoutes extends React.Component {
     let routes = (
       <Switch>
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/" component={DasboardContainer} />
+        <PrivateRoute exact authed={this.props.isLoggedIn} path="/admin" component={AdminContainer} />
         <PrivateRoute authed={this.props.isLoggedIn} path="/my-events" component={EventsContainer} />
         <PrivateRoute authed={this.props.isLoggedIn} path="/events/:id" component={EventsContainer} />
         <Route path="/login" component={AuthContainer}/>
         <Route path="/logout" component={LogoutComponent}/>
-        <Redirect to="/events/12" />
+        <Redirect to="/admin" />
       </Switch>
     )
 

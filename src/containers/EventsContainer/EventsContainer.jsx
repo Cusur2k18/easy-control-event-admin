@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import GridIcon from '@atlaskit/icon/glyph/media-services/grid';
 import TableIcon from '@atlaskit/icon/glyph/table';
+import CalendarIcon from '@atlaskit/icon/glyph/calendar';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import Tooltip from '@atlaskit/tooltip';
 
@@ -50,7 +51,7 @@ export class EventsContainer extends React.Component {
         click={this.handleClickElement} />
     );
     let gridSelector = (
-      <div className="grid-selector ml-3">
+      <div className="grid-selector float-right mr-5">
         <ButtonGroup>
           <Tooltip content="Vista por tablas" delay={300}>
             <Button
@@ -79,7 +80,7 @@ export class EventsContainer extends React.Component {
       <div id="events-page">
         <div className="row">
           <div className="col-sm-12">
-            <h2>{this.state.isEdit ? 'Detalle' : 'Mis Eventos'}</h2>
+            <h2><CalendarIcon size="large" /></h2>
             <hr/>
             {gridSelector}
           </div>

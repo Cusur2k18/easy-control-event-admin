@@ -23,6 +23,9 @@ export class Layout extends React.Component {
             {this.props.children}
           </div>
         </Page>
+        <div className="footer">
+          <i> - Universidad de Guadalajara &reg; - </i>
+        </div>
       </div>
     )
   }
