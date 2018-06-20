@@ -13,6 +13,11 @@ body {
     left: 10rem;
     right: 0;
     width: 100%;
+
+    &.pos-l-0 {
+      left: 0;
+    }
+    
     i {
       color: #b3b3b3;
     }
