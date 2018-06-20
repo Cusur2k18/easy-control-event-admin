@@ -7,6 +7,7 @@ import ClockIcon from '@atlaskit/icon/glyph/emoji/frequent';
 import QRICon from '@atlaskit/icon/glyph/jira/capture';
 import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import ActiveIcon from '@atlaskit/icon/glyph/presence-active';
+import Tooltip from '@atlaskit/tooltip';
 
 import ThumbView from '../../UI/ThumbView/ThumbView';
 import ActionButton from '../../UI/ActionButton/ActionButton';
@@ -25,7 +26,7 @@ export default (props) => {
   return (
     <React.Fragment>
 
-      <div className="col-sm-12 col-md-10 event-detail">
+      <div className="col-sm-12 col-md-12 event-detail">
         <div className="card">
           <img className="card-img-top" src="http://via.placeholder.com/300x30" alt="Card cap" />
           <div className="card-body">
@@ -33,7 +34,7 @@ export default (props) => {
             <hr/>
             <div className="row mt-5">
 
-              <div className="col-sm-12 col-md-8 right-gray-border">
+              <div className="col-sm-12 col-md-12 col-lg-7 right-gray-border">
                 <div className="description-event">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem totam enim sunt officiis earum repellat tenetur eos molestias, laudantium accusamus optio vitae perferendis voluptas nihil commodi porro, est culpa ullam voluptates qui nesciunt quo facere eum! Impedit illo ex, eos dolorum, asperiores exercitationem fugit excepturi odit atque iure aliquam voluptatibus?</p>
                 </div>
@@ -58,7 +59,7 @@ export default (props) => {
                 </ul>
               </div>
 
-              <div className="col-sm-12 col-md-4 mt-5">
+              <div className="col-sm-12 col-md-5 mt-5">
                 <div className="col-sm-12">
                   <ul className="styless-list pl-2">
                     <li className="schedule-list-item">
@@ -77,6 +78,20 @@ export default (props) => {
                 </div>
                 <hr/>
                 <div className="col-sm-12 mt-5">
+                  <div className="col-sm-12 col-md-12">
+                    <div className="row text-center">
+                      <div className="col-6">
+                        <Tooltip content="Editar evento" delay={300} position="top">
+                          <ActionButton type="edit" />
+                        </Tooltip>
+                      </div>
+                      <div className="col-6">
+                        <Tooltip content="Borrar Evento" delay={300} position="top">
+                        <ActionButton type="delete" />
+                        </Tooltip>
+                      </div>
+                    </div>
+                  </div>
                   <div>
                     <p>Descarga el codigo QR de este evento</p>
                     <button type="button" className="btn btn-primary btn-block">
@@ -85,18 +100,8 @@ export default (props) => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="col-sm-12-col-md-2 event-detail">
-        <div className="d-flex flex-column">
-          <div className="action-item">
-            <ActionButton type="edit"/>
-          </div>
-          <div className="action-item mt-5">
-            <ActionButton type="delete"/>
+            </div>
           </div>
         </div>
       </div>
