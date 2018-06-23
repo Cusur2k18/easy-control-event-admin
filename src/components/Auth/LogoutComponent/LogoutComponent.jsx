@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as logoutActions from '../../store/actions';
+import * as logoutActions from '../../../store/actions';
 
 export class LogoutComponent extends React.Component {
 
