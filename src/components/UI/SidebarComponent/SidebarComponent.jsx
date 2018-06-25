@@ -8,7 +8,7 @@ import Navigation, {
   presetThemes,
 } from '@atlaskit/navigation';
 
-import Logo from '../../../assets/logo-udg.png';
+import DefaulUserImg from '../../../assets/default-user-image.png';
 import RouterLinkItem from '../RouterLinkItem/RouterLinkItem';
 import * as config from '../../../utils/config';
 
@@ -36,9 +36,8 @@ export default withRouter((props) => {
   return (
     <Navigation
       containerTheme={presetThemes.dark}
-      globalPrimaryItemHref="/"
       globalPrimaryIcon={
-        <img src={Logo} width="30" height="35" alt="Username" />
+        <img src={DefaulUserImg} width="30" height="30" alt="Username" />
       }
       containerHeaderComponent={() => (
         <AkContainerTitle
