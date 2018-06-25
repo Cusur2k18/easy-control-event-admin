@@ -11,8 +11,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 import authReducer from './store/reducers/authReducer';
 
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose,
-      rootReducer = combineReducers({
+const composeEnhancers = process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+
+const rootReducer = combineReducers({
         auth: authReducer
       }),
       store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
