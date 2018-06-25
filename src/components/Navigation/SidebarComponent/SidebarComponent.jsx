@@ -20,7 +20,7 @@ export default withRouter((props) => {
         <RouterLinkItem 
           key={subMenuItem.id} 
           to={subMenuItem.src}
-          isSelected={props.location.pathname === subMenuItem.src} 
+          isSelected={props.location.pathname === subMenuItem.src}
           text={subMenuItem.text}
           icon={subMenuItem.icon}/>
         )

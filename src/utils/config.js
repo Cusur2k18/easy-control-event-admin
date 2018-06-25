@@ -13,7 +13,7 @@ export const SideBarMenuItems = [
   { id: '1', type:'header', title: 'Menu', 
     items: [
       { id: '1.1', type:'item', text: 'Inicio', src: '/', icon: <DashboardIcon size="medium"/> },
-      { id: '1.2', type:'item', text: 'Mis Eventos', src: '/my-events', icon: <EventIcon size="medium" /> },
+      { id: '1.2', type:'item', text: 'Mis Eventos', src: '/events', icon: <EventIcon size="medium" /> },
       { id: '1.3', type:'item', text: 'Administracion', src: '/admin', icon: <SettingsIcon size="medium" /> }
     ]
   },

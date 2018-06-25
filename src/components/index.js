@@ -1,6 +1,4 @@
 // UI
-export { default as SidebarComponent } from './UI/SidebarComponent/SidebarComponent';
-export { default as RouterLinkComponent } from './UI/RouterLinkComponent/RouterLinkComponent';
 export { default as TableComponent } from './UI/TableComponent/TableComponent';
 export { default as CardComponent } from './UI/CardComponent/CardComponent';
 export { default as ThumbView } from './UI/ThumbView/ThumbView';
@@ -10,6 +8,8 @@ export { default as ImageComponent } from './UI/ImageComponent/ImageComponent';
 
 // Navigation
 export { default as PrivateRoute } from './Navigation/PrivateRoute/PrivateRoute';
+export { default as SidebarComponent } from './Navigation/SidebarComponent/SidebarComponent';
+export { default as RouterLinkComponent } from './Navigation/RouterLinkComponent/RouterLinkComponent';
 
 // Auth
 export { default as LogoutComponent } from './Auth/LogoutComponent/LogoutComponent';
