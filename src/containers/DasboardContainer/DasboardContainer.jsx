@@ -42,7 +42,7 @@ export default class DasboardContainer extends React.Component {
               </div>
 
               <div className="col-sm-12 col-md-6">
-                <div className="card orange">
+                <div className="card green">
                   <div className="card-body">
                     <a className="float-right">Ver mas <ChevronRightIcon size="small" /></a>
                     <h5 className="card-title"> <EventIcon size="medium" primaryColor="#476F12" /> Ultimos eventos creados</h5>
