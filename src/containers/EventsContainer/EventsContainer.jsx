@@ -10,13 +10,16 @@ import AddIcon from '@atlaskit/icon/glyph/add-circle';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import Tooltip from '@atlaskit/tooltip';
 
+import RichTextEditor from 'react-rte';
+
 import { EventsComponent, EventDetailComponent, EventFormComponent } from '../../components';
 
 export class EventsContainer extends React.Component {
 
   state = {
     activeView: 'table',
-    isShow: false
+    isShow: false,
+    eventDescription: RichTextEditor.createEmptyValue()
   }
 
   componentDidMount = () => {
@@ -58,6 +61,13 @@ export class EventsContainer extends React.Component {
   showUploader() {
     window.cloudinary.openUploadWidget({ cloud_name: 'demo', upload_preset: 'a5vxnzbp'}, 
       function(error, result) { console.log(error, result) });
+  }
+
+  editorChange = (value) => {
+    this.setState({
+      ...this.state,
+      eventDescription: value
+    })
   }
 
   render() {
@@ -105,7 +115,7 @@ export class EventsContainer extends React.Component {
     }
 
     if (this.state.isCreate) {
-      contentView = <EventFormComponent  click={this.showUploader}/>;
+      contentView = <EventFormComponent click={this.showUploader} eventDescription={this.state.eventDescription} editorChange={this.editorChange}/>;
       gridSelector = null;
     }
 

@@ -4,10 +4,14 @@ import TextField from '@atlaskit/field-text';
 import { DateTimePicker } from '@atlaskit/datetime-picker';
 import { Label } from '@atlaskit/field-base';
 import ImageIcon from '@atlaskit/icon/glyph/image';
+import AddIcon from '@atlaskit/icon/glyph/add-circle';
+
+import RichTextEditor from 'react-rte';
 
 import { ImageComponent } from '../../'
 
 export default (props) => {
+
   return (
     <div className="col-sm-12">
       <form action="" className="needs-validation" noValidate>
@@ -83,9 +87,33 @@ export default (props) => {
           
           </div>
 
-          <div className="col-sm-12 col-md-12"></div>
+          <div className="col-sm-12 col-md-12 mt-4">
 
-          <div className="col-sm-12 col-md-12"></div>
+            <div className="card">
+              <div className="card-header text-left bg-dark text-white">
+                Descripcion
+              </div>
+              <div className="card-body px-5">
+                <div className="form-row">
+                  <div className="col-sm-12">
+                    <RichTextEditor 
+                      value={props.eventDescription}
+                      onChange={props.editorChange}
+                      placeholder="Descripcion del evento...."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+
+          <div className="col-sm-12 col-md-12">
+            <hr/>
+            <button type="button" className="btn btn-success">
+              <AddIcon size="small" primaryColor="#28a745" /> Crear Evento
+            </button>
+          </div>
 
         </div>
       </form>
