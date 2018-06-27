@@ -38,6 +38,11 @@ export class EventsContainer extends React.Component {
     }
   }
 
+  componentDidChange = (prevProps) => {
+    return this.props.match.params.id !== prevProps.match.params.id
+           || this.props.match.path !== prevProps.match.path;
+  }
+
   onSwitchViews = (activeView) => {
     this.setState({ activeView })
   }
@@ -50,9 +55,9 @@ export class EventsContainer extends React.Component {
     this.props.history.push(`/events/create`);
   }
   
-  componentDidChange = (prevProps) => {
-    return this.props.match.params.id !== prevProps.match.params.id
-           || this.props.match.path !== prevProps.match.path;
+  showUploader() {
+    window.cloudinary.openUploadWidget({ cloud_name: 'demo', upload_preset: 'a5vxnzbp'}, 
+      function(error, result) { console.log(error, result) });
   }
 
   render() {
@@ -100,7 +105,7 @@ export class EventsContainer extends React.Component {
     }
 
     if (this.state.isCreate) {
-      contentView = <EventFormComponent />;
+      contentView = <EventFormComponent  click={this.showUploader}/>;
       gridSelector = null;
     }
 
