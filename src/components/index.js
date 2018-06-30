@@ -15,7 +15,11 @@ export { default as RouterLinkComponent } from './Navigation/RouterLinkComponent
 export { default as LogoutComponent } from './Auth/LogoutComponent/LogoutComponent';
 
 // User
-export { default as UserDetailComponent } from './Admin/UserDetailComponent/UserDetailComponent';
+export { default as UserDetailComponent } from './Account/UserDetailComponent/UserDetailComponent';
+
+// People
+export { default as PeopleDetailComponent } from './Admin/PeopleDetailComponent/PeopleDetailComponent';
+export { default as PeopleFormComponent } from './Admin/PeopleFormComponent/PeopleFormComponent';
 
 // Events
 export { default as EventsComponent } from './Events/EventsComponent/EventsComponent';

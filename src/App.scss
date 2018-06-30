@@ -51,6 +51,14 @@ body {
   border-right: 1px solid #e3e3e3;
 }
 
+.left-gray-border {
+  border-left: 2px solid #e3e3e3;
+
+  &.left-shadow {
+    box-shadow: 1px 0 2px #d3d3d3;
+  }
+}
+
 .styless-list {
   list-style: none;
   margin-bottom: 0;

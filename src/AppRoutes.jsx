@@ -18,8 +18,13 @@ export class AppRoutes extends React.Component {
     let routes = (
       <Switch>
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/" component={DasboardContainer} />
+
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/admin" component={AdminContainer} />
+        <PrivateRoute exact authed={this.props.isLoggedIn} path="/admin/:segment" component={AdminContainer} />
+        <PrivateRoute exact authed={this.props.isLoggedIn} path="/admin/:segment/create" component={AdminContainer} />
+
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/account" component={AccountContainer} />
+        
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/events" component={EventsContainer} />
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/events/create" component={EventsContainer} />
         <PrivateRoute exact authed={this.props.isLoggedIn} path="/events/:id" component={EventsContainer} />

@@ -70,7 +70,7 @@ export class AuthContainer extends React.Component {
     }
 
     if (this.props.isLoggedIn) {
-      return <Redirect to="/events/create" />;
+      return <Redirect to="admin/" />;
     }
     
     return (
