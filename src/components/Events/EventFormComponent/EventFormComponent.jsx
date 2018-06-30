@@ -53,7 +53,19 @@ export default (props) => {
               <div className="card-body px-5">
                 <div className="form-row">
                   <div className="col-sm-12">
-                  <Label label="Fecha y hora" isRequired />
+                  <Label label="Fecha y hora de Inicio" isRequired />
+                  <DateTimePicker
+                    onChange={console.log}
+                    dateFormat="DD/MMM/YY"
+                    datePickerSelectProps={{
+                      placeholder: 'e.g. 31/Dec/18',
+                    }}
+                  />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="col-sm-12">
+                  <Label label="Fecha y hora de Finalizacion" isRequired />
                   <DateTimePicker
                     onChange={console.log}
                     dateFormat="DD/MMM/YY"
