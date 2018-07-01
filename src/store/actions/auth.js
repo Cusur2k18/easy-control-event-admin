@@ -42,6 +42,7 @@ export const login = (username, password, includeUser=true) => {
             firstName: res.data.user.firstName,
             lastName: res.data.user.lastName,
             mLastName: res.data.user.mLastName,
+            accountId: res.data.user.accountId
           }
 
           localStorage.setItem('token', res.data.id);

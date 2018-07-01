@@ -9,6 +9,7 @@ import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import DocIcon from '@atlaskit/icon/glyph/tray';
 import BugIcon from '@atlaskit/icon/glyph/jira/test-session';
 
+// This is the sidebar menu
 export const SideBarMenuItems = [
   { id: '1', type:'header', title: 'Menu', 
     items: [
@@ -25,6 +26,7 @@ export const SideBarMenuItems = [
   },
 ]
 
+// This are the configuration items from the administration page
 export const ConfigurationItems = [
   { id: 1, description: 'Usuarios de Division', icon: <PeopleGroupIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/admin/people'  },
   { id: 2, description: 'Constancias', icon: <DocIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/admin/diplomas'  },

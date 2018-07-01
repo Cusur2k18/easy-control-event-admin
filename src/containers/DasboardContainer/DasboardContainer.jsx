@@ -1,5 +1,7 @@
 import React from 'react';
 import './DasboardContainer.scss';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -10,12 +12,21 @@ import ClockIcon from '@atlaskit/icon/glyph/emoji/frequent';
 import CalendarIcon from '@atlaskit/icon/glyph/calendar';
 import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
 
+import * as dashboardActions from '../../store/actions';
 import { TableComponent } from '../../components/';
 
 // Setup moment for Date internationalization and localization
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 
-export default class DasboardContainer extends React.Component {
+export class DasboardContainer extends React.Component {
+
+  componentDidMount = () => {
+
+    // Get all data
+    this.props.onGetTodayEvents();
+    this.props.onGetFilteredEvents();
+    this.props.onGetLatestEvents();
+  }
 
   render() {
     
@@ -82,3 +93,23 @@ export default class DasboardContainer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  todayEvents: state.dashboard.todayEvents,
+  todayLoading: state.dashboard.loading.today,
+  filteredEvents: state.dashboard.filteredEvents,
+  filteredLoading: state.dashboard.loading.filtered,
+  latestEvents: state.dashboard.latestEvents,
+  latestLoading: state.dashboard.loading.latest,
+  error: state.dashboard.dashboardError
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetTodayEvents: () => dispatch(dashboardActions.getTodayEvents()),
+    onGetFilteredEvents: () => dispatch(dashboardActions.getFilteredEvents()),
+    onGetLatestEvents: () => dispatch(dashboardActions.getLatestEvents())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DasboardContainer));
