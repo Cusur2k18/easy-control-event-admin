@@ -20,9 +20,19 @@ export default (props) => {
     cssClasses.push('mx-auto d-block');
   }
 
+  if(props.clickable) {
+    cssClasses.push('item-clickable');
+  }
+
   return (
     <React.Fragment>
-      <img src={props.src} alt={props.alt} height={props.height} width={props.width} className={cssClasses.join(' ')}/>
+      <img 
+        src={props.src} 
+        alt={props.alt} 
+        height={props.height} 
+        width={props.width} 
+        className={cssClasses.join(' ')}
+        onClick={props.click || function () {}}/>
     </React.Fragment>
   )
 }

@@ -32,3 +32,9 @@ export const ConfigurationItems = [
   { id: 2, description: 'Constancias', icon: <DocIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/admin/diplomas'  },
   { id: 3, description: 'Reportar un Bug', icon: <BugIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/bug'  }
 ]
+
+
+export const cloudinaryConfiguration = {
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  upload_preset: process.env.CLOUDINARY_PRESET
+}

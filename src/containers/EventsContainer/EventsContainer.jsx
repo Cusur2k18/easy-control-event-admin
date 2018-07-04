@@ -1,5 +1,6 @@
 import React from 'react';
 import './EventsContainer.scss';
+import 'react-viewer/dist/index.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -11,6 +12,10 @@ import Button, { ButtonGroup } from '@atlaskit/button';
 import Tooltip from '@atlaskit/tooltip';
 
 import RichTextEditor from 'react-rte';
+import Viewer from 'react-viewer';
+
+import { MediaService } from '../../shared/services';
+import { transformImage } from '../../utils';
 
 import { EventsComponent, EventDetailComponent, EventFormComponent } from '../../components';
 
@@ -19,7 +24,76 @@ export class EventsContainer extends React.Component {
   state = {
     activeView: 'table',
     isShow: false,
-    eventDescription: RichTextEditor.createEmptyValue()
+    form: {
+      controls: {
+        name: {
+          value: '',
+          key: 'name',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        career: {
+          value: '',
+          key: 'career',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        place: {
+          value: '',
+          key: 'place',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        startDate: {
+          value: '',
+          key: 'startDate',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        endDate: {
+          value: '',
+          key: 'endDate',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        photo: {
+          value: '',
+          key: 'photo',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        },
+        description: {
+          value: RichTextEditor.createEmptyValue(),
+          key: 'description',
+          descriptionText: '',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false
+        }
+      }
+    },
+    eventThumbnail: null,
+    showImage: false
   }
 
   componentDidMount = () => {
@@ -34,7 +108,6 @@ export class EventsContainer extends React.Component {
   componentDidUpdate = (prevProps) => {
     if (this.componentDidChange(prevProps)) {
       this.setState({
-        ...this.state,
         isShow: !!this.props.match.params.id,
         isCreate: this.props.match.path.indexOf('/events/create') >= 0
       })
@@ -58,16 +131,65 @@ export class EventsContainer extends React.Component {
     this.props.history.push(`/events/create`);
   }
   
-  showUploader() {
-    window.cloudinary.openUploadWidget({ cloud_name: 'demo', upload_preset: 'a5vxnzbp'}, 
-      function(error, result) { console.log(error, result) });
+  showUploader = () => {
+    MediaService.showUploader((error, result) => {
+      if (error) {
+        console.log('Error uploading the image', error)
+        return
+      }
+      const data = result[0];
+      this.setState({
+        ...this.state,
+        form: {
+          ...this.state.form,
+          controls: {
+            ...this.state.form.controls,
+            photo: {
+              ...this.state.form.controls.photo,
+              validation: {
+                ...this.state.form.controls.photo.validation
+              },
+              value: data.secure_url
+            }
+          }
+        },
+        eventThumbnail: transformImage(data.secure_url, 'thumb')
+      })
+    })
+
   }
 
-  editorChange = (value) => {
+  formChangeHandler = (value, key) => {
+    const updatedControl = {...this.state.form.controls[key]}
+    updatedControl.value = value
+
+    // Workaround: this is only for the wysiwyg editor
+    if (key === 'description') {
+      updatedControl.descriptionText = value.toString('markdown')
+    }
     this.setState({
       ...this.state,
-      eventDescription: value
+      form: {
+        ...this.state.form,
+        controls: {
+          ...this.state.form.controls,
+          [key]: updatedControl
+        }
+      }
     })
+  }
+
+  onCloseImageModal = () => {
+    this.setState({ showImage: false })
+  }
+
+  onOpenImageModal = () => {
+    this.setState({ showImage: true })
+  }
+
+  onSubmitForm = (e) => {
+    e.preventDefault()
+    console.log('this.state.form.controls', this.state.form.controls);
   }
 
   render() {
@@ -115,26 +237,40 @@ export class EventsContainer extends React.Component {
     }
 
     if (this.state.isCreate) {
-      contentView = <EventFormComponent click={this.showUploader} eventDescription={this.state.eventDescription} editorChange={this.editorChange}/>;
+      contentView = (
+        <EventFormComponent 
+          click={this.showUploader} 
+          controls={this.state.form.controls} 
+          formHandler={this.formChangeHandler}
+          onSubmit={this.onSubmitForm}
+          imagePreview={this.state.eventThumbnail}
+          imageClick={this.onOpenImageModal}/>
+      );
       gridSelector = null;
     }
 
     return (
-      <div id="events-page">
-        <div className="row">
-          <div className="col-sm-12">
-            <h2><CalendarIcon size="large" /></h2>
-            <hr/>
-            {gridSelector}
-          </div>
-        </div>
-
-        <div className="container-fluid">
+      <React.Fragment>
+        <Viewer
+          visible={this.state.showImage}
+          onClose={this.onCloseImageModal}
+          images={[{src: this.state.form.controls.photo.value, alt: 'Nothing'}]} />
+        <div id="events-page">
           <div className="row">
-            {contentView}
+            <div className="col-sm-12">
+              <h2><CalendarIcon size="large" /></h2>
+              <hr/>
+              {gridSelector}
+            </div>
+          </div>
+
+          <div className="container-fluid">
+            <div className="row">
+              {contentView}
+            </div>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }

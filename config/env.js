@@ -77,7 +77,9 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
-        BASE_API_URL: process.env.BASE_API_URL
+        BASE_API_URL: process.env.BASE_API_URL,
+        CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+        CLOUDINARY_PRESET: process.env.CLOUDINARY_PRESET
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

@@ -64,6 +64,10 @@ body {
   margin-bottom: 0;
 }
 
-.inMfJN {
-  background-color: #2684FF !important;
+.item-clickable {
+  cursor: pointer;
+}
+
+.react-viewer-transition {
+  transition: opacity .01s ease-in-out !important;
 }
