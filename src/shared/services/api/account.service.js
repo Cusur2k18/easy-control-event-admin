@@ -29,8 +29,8 @@ export class AccountService extends BaseApiService {
     to = to || moment().endOf('month');
     const filter = JSON.stringify({
       "where": {
-        "startDateTime": from,
-        "endDateTime": to
+        "startDateTime": { "gt": from },
+        "endDateTime": { "lt": to }
       }
     })
     return api.get(`${this.baseUrl()}/${accountId}/events?filter=${filter}`)

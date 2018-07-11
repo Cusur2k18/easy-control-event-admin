@@ -77,11 +77,12 @@ export class DasboardContainer extends React.Component {
                 <hr />
                 <div className="container calendar mt-5">
                   <BigCalendar
-                    events={[]}
+                    events={this.props.filteredEvents || []}
                     selectable
                     views={['month', 'day', 'week']}
-                    startAccessor='startDate'
-                    endAccessor='endDate' />
+                    startAccessor='startDateTime'
+                    endAccessor='endDateTime'
+                    titleAccessor="name" />
                 </div>
               </div>
             </div>
