@@ -11,13 +11,15 @@ import registerServiceWorker from './registerServiceWorker';
 
 import authReducer from './store/reducers/authReducer';
 import dashboardReducer from './store/reducers/dashboardReducer';
+import eventsReducer from './store/reducers/eventsReducer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
         auth: authReducer,
-        dashboard: dashboardReducer
+        dashboard: dashboardReducer,
+        events: eventsReducer
       }),
       store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 

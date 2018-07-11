@@ -9,3 +9,7 @@ export {
   getFilteredEvents,
   getLatestEvents
 } from './dashboard'
+
+export {
+  saveEvent
+} from './events'

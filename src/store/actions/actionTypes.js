@@ -44,3 +44,22 @@ export const INIT_LATEST_EVENTS = 'INIT_LATEST_EVENTS'
 export const LATEST_EVENTS_SUCCESS = 'LATEST_EVENTS_SUCCESS'
 export const LATEST_EVENTS_FAIL = 'LATEST_EVENTS_FAIL'
 export const SET_LATEST_EVENTS = 'SET_LATEST_EVENTS'
+
+/**  
+ *  ________                                __                      ______               __      __                               
+ * /        |                              /  |                    /      \             /  |    /  |                              
+ * $$$$$$$$/__     __  ______   _______   _$$ |_    _______       /$$$$$$  |  _______  _$$ |_   $$/   ______   _______    _______ 
+ * $$ |__  /  \   /  |/      \ /       \ / $$   |  /       |      $$ |__$$ | /       |/ $$   |  /  | /      \ /       \  /       |
+ * $$    | $$  \ /$$//$$$$$$  |$$$$$$$  |$$$$$$/  /$$$$$$$/       $$    $$ |/$$$$$$$/ $$$$$$/   $$ |/$$$$$$  |$$$$$$$  |/$$$$$$$/ 
+ * $$$$$/   $$  /$$/ $$    $$ |$$ |  $$ |  $$ | __$$      \       $$$$$$$$ |$$ |        $$ | __ $$ |$$ |  $$ |$$ |  $$ |$$      \ 
+ * $$ |_____ $$ $$/  $$$$$$$$/ $$ |  $$ |  $$ |/  |$$$$$$  |      $$ |  $$ |$$ \_____   $$ |/  |$$ |$$ \__$$ |$$ |  $$ | $$$$$$  |
+ * $$       | $$$/   $$       |$$ |  $$ |  $$  $$//     $$/       $$ |  $$ |$$       |  $$  $$/ $$ |$$    $$/ $$ |  $$ |/     $$/ 
+ * $$$$$$$$/   $/     $$$$$$$/ $$/   $$/    $$$$/ $$$$$$$/        $$/   $$/  $$$$$$$/    $$$$/  $$/  $$$$$$/  $$/   $$/ $$$$$$$/  
+*/
+export const INIT_EVENTS = 'INIT_EVENTS'
+export const EVENTS_SUCCESS = 'EVENTS_SUCCESS'
+export const EVENTS_FAIL = 'EVENTS_FAIL'
+export const SET_EVENTS = 'SET_EVENTS'
+export const INIT_UPSERT_EVENT = 'INIT_UPSERT_EVENT'
+export const UPSERT_EVENT_SUCCESS = 'UPSERT_EVENT_SUCCESS'
+export const UPSERT_EVENT_FAIL = 'UPSERT_EVENT_FAIL'

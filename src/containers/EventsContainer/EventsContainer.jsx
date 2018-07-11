@@ -17,6 +17,8 @@ import Viewer from 'react-viewer';
 import { MediaService } from '../../shared/services';
 import { transformImage } from '../../utils';
 
+import * as eventsActions from '../../store/actions';
+
 import { EventsComponent, EventDetailComponent, EventFormComponent } from '../../components';
 
 export class EventsContainer extends React.Component {
@@ -44,36 +46,36 @@ export class EventsContainer extends React.Component {
           valid: false,
           touched: false
         },
-        place: {
+        location: {
           value: '',
-          key: 'place',
+          key: 'location',
           validation: {
             required: true
           },
           valid: false,
           touched: false
         },
-        startDate: {
+        startDateTime: {
           value: '',
-          key: 'startDate',
+          key: 'startDateTime',
           validation: {
             required: true
           },
           valid: false,
           touched: false
         },
-        endDate: {
+        endDateTime: {
           value: '',
-          key: 'endDate',
+          key: 'endDateTime',
           validation: {
             required: true
           },
           valid: false,
           touched: false
         },
-        photo: {
+        coverImg: {
           value: '',
-          key: 'photo',
+          key: 'coverImg',
           validation: {
             required: true
           },
@@ -144,10 +146,10 @@ export class EventsContainer extends React.Component {
           ...this.state.form,
           controls: {
             ...this.state.form.controls,
-            photo: {
-              ...this.state.form.controls.photo,
+            coverImg: {
+              ...this.state.form.controls.coverImg,
               validation: {
-                ...this.state.form.controls.photo.validation
+                ...this.state.form.controls.coverImg.validation
               },
               value: data.secure_url
             }
@@ -189,7 +191,16 @@ export class EventsContainer extends React.Component {
 
   onSubmitForm = (e) => {
     e.preventDefault()
-    console.log('this.state.form.controls', this.state.form.controls);
+    const formData = this.state.form.controls
+    const data = {}
+    Object.keys(formData).forEach( k => {
+      data[k] = formData[k].value
+      if (k === 'description') {  // Workaround for description field, since the editor needs to have the real object value for a good render
+        data[k] = formData[k].descriptionText
+      }
+    })
+    data.accountId = this.props.currentUser.accountId
+    this.props.onCreateEvent(data);
   }
 
   render() {
@@ -254,7 +265,7 @@ export class EventsContainer extends React.Component {
         <Viewer
           visible={this.state.showImage}
           onClose={this.onCloseImageModal}
-          images={[{src: this.state.form.controls.photo.value, alt: 'Nothing'}]} />
+          images={[{src: this.state.form.controls.coverImg.value, alt: 'Nothing'}]} />
         <div id="events-page">
           <div className="row">
             <div className="col-sm-12">
@@ -275,4 +286,15 @@ export class EventsContainer extends React.Component {
   }
 }
 
-export default withRouter(connect(null, null)(EventsContainer));
+const mapStateToProps = (state) => ({
+  currentUser: state.auth.currentUser
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event))
+  }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EventsContainer));

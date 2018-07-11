@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const api =  axios.create({
   baseURL: process.env.BASE_API_URL,
-  headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
+  headers: {'Authorization': localStorage.getItem('token')}
 });
 
 api.interceptors.request.use( config => { // Create an interceptor only for get request, since we need to include the token as a query param

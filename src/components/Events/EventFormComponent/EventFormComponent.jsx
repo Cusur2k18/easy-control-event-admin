@@ -51,9 +51,9 @@ export default (props) => {
                 <div className="form-row mt-3 mb-3">
                   <div className="col-sm-12">
                     <TextField 
-                      value={props.controls.place.value}
+                      value={props.controls.location.value}
                       required 
-                      onChange={(e) => {props.formHandler(e.target.value, props.controls.place.key)}}
+                      onChange={(e) => {props.formHandler(e.target.value, props.controls.location.key)}}
                       compact={true} 
                       label="Lugar" 
                       shouldFitContainer={true} 
@@ -76,8 +76,8 @@ export default (props) => {
                   <div className="col-sm-12">
                   <Label label="Fecha y hora de Inicio" isRequired />
                   <DateTimePicker
-                    value={props.controls.startDate.value}
-                    onChange={(time) => {props.formHandler(time, props.controls.startDate.key)}}
+                    value={props.controls.startDateTime.value}
+                    onChange={(time) => {props.formHandler(time, props.controls.startDateTime.key)}}
                     dateFormat="DD/MMM/YY"
                     datePickerSelectProps={{
                       placeholder: 'e.g. 31/Dec/18',
@@ -89,8 +89,8 @@ export default (props) => {
                   <div className="col-sm-12">
                   <Label label="Fecha y hora de Finalizacion" isRequired />
                   <DateTimePicker
-                    value={props.controls.endDate.value}
-                    onChange={(time) => {props.formHandler(time, props.controls.endDate.key)}}
+                    value={props.controls.endDateTime.value}
+                    onChange={(time) => {props.formHandler(time, props.controls.endDateTime.key)}}
                     dateFormat="DD/MMM/YY"
                     datePickerSelectProps={{
                       placeholder: 'e.g. 31/Dec/18',
