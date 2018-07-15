@@ -20,7 +20,7 @@ export default (props) => {
     data.push((
       <React.Fragment key={i}>
         <tr onClick={() => {}}>
-          <th scope="row"><div className="th-table-loading">&nbsp;</div></th>
+          <th scope="row"><div className="th-table-loading extra">&nbsp;</div></th>
           <td><div className="th-table-loading">&nbsp;</div></td>
           <td><div className="th-table-loading">&nbsp;</div></td>
           <td><div className="th-table-loading">&nbsp;</div></td>
@@ -55,7 +55,7 @@ export default (props) => {
             <th scope="col">Hora</th>
           </tr>
         </thead>
-        <tbody className={props.loading ? 'opacity-4' : ''}>
+        <tbody>
           {data}
         </tbody>
       </table>

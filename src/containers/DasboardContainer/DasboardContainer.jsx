@@ -50,11 +50,6 @@ export class DasboardContainer extends React.Component {
                         loading={this.props.todayLoading}
                         items={this.props.todayEvents || []}
                       />
-                      {this.props.todayLoading && (<div className="loading-container b-10 d-flex align-items-center justify-content-center">
-                        <div className="loading">
-                          <Spinner size="large" />
-                        </div>
-                      </div>)}
                     </div>
                   </div>
                 </div>
@@ -73,11 +68,6 @@ export class DasboardContainer extends React.Component {
                         loading={this.props.latestLoading}
                         items={this.props.latestEvents || []}
                       />
-                      {this.props.latestLoading && (<div className="loading-container b-10 d-flex align-items-center justify-content-center">
-                        <div className="loading">
-                          <Spinner size="large" />
-                        </div>
-                      </div>)}
                     </div>
                   </div>
                 </div>

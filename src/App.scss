@@ -93,6 +93,27 @@ body {
 }
 
 .th-table-loading {
-  background:  linear-gradient(to right,#CFCFCF, #F2F2F2);
+  background: #f6f7f8;
+  background:  linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 500px 100px;
   border-radius: 3px;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: loadingRow;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+
+  &.extra {
+    animation-duration: 13s;
+  }
+}
+
+
+@keyframes loadingRow{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
 }
