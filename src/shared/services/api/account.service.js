@@ -24,14 +24,15 @@ export class AccountService extends BaseApiService {
    * @returns
    * @memberof AccountService
    */
-  static getFilteredEvents(accountId, from, to) {
+  static getFilteredEvents(accountId, from, to, count = 20) {
     from = from || moment().startOf('month');
     to = to || moment().endOf('month');
     const filter = JSON.stringify({
       "where": {
         "startDateTime": { "gte": from },
         "endDateTime": { "lte": to }
-      }
+      },
+      "count": count
     })
     return api.get(`${this.baseUrl()}/${accountId}/events?filter=${filter}`)
       .then( response => parseRequest(response) )
@@ -47,7 +48,7 @@ export class AccountService extends BaseApiService {
    */
   static getTodayEvents(accountId, count = 5) {
     const now = moment().format('YYYY-MM-DD');
-    const tomorrow = moment().add(1, 'd').format();
+    const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
     const filter = JSON.stringify({
       "where": {
         "and": [
@@ -55,7 +56,7 @@ export class AccountService extends BaseApiService {
             "startDateTime": { "gte": now }
           },
           {
-            "startDateTime": { "lte": tomorrow }
+            "startDateTime": { "lt": tomorrow }
           }
         ]
       },

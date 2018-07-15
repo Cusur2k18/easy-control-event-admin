@@ -83,7 +83,11 @@ export class AdminContainer extends React.Component {
                 </div>
                 <div className="row">
                   <div className={this.state.selectedUser ? 'col-sm-12 col-md-8' : 'col-sm-12 col-md-12'}>
-                    <TableComponent hoverable borderless click={this.onPeopleDetail}/>
+                    <TableComponent 
+                      hoverable
+                      borderless
+                      items={[]}
+                      click={this.onPeopleDetail}/>
                   </div>
                   {
                     this.state.selectedUser && (

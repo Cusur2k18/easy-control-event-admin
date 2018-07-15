@@ -11,6 +11,7 @@ export default (props) => {
       <TableComponent 
         hoverable
         borderless
+        items={[]}
         click={props.click}    
       />
     </div>
