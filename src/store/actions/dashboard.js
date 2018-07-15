@@ -36,7 +36,7 @@ export const getTodayEvents = () => {
 
     let userInfo = JSON.parse(localStorage.getItem('user'))
 
-    AccountService.getRecordsByAccountId(userInfo.accountId, 'events')
+    AccountService.getTodayEvents(userInfo.accountId)
       .then( res => {
         console.log(res);
         if (res.status === 200) {

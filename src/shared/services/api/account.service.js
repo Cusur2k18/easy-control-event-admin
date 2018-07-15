@@ -29,9 +29,37 @@ export class AccountService extends BaseApiService {
     to = to || moment().endOf('month');
     const filter = JSON.stringify({
       "where": {
-        "startDateTime": { "gt": from },
-        "endDateTime": { "lt": to }
+        "startDateTime": { "gte": from },
+        "endDateTime": { "lte": to }
       }
+    })
+    return api.get(`${this.baseUrl()}/${accountId}/events?filter=${filter}`)
+      .then( response => parseRequest(response) )
+      .catch( error => parseRequest(error) );
+  }
+  /*
+   * @description Return all the events for today
+   * @static
+   * @param {*} accountId
+   * @param {*} count
+   * @returns Promise
+   * @memberof AccountService
+   */
+  static getTodayEvents(accountId, count = 5) {
+    const now = moment().format('YYYY-MM-DD');
+    const tomorrow = moment().add(1, 'd').format();
+    const filter = JSON.stringify({
+      "where": {
+        "and": [
+          {
+            "startDateTime": { "gte": now }
+          },
+          {
+            "startDateTime": { "lte": tomorrow }
+          }
+        ]
+      },
+      "limit": count
     })
     return api.get(`${this.baseUrl()}/${accountId}/events?filter=${filter}`)
       .then( response => parseRequest(response) )

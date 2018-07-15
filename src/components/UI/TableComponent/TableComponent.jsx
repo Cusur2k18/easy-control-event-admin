@@ -1,5 +1,5 @@
 import React from 'react';
-import * as moment from 'moment'
+import { displayTime } from '../../../utils'
 
 export default (props) => {
 
@@ -38,7 +38,7 @@ export default (props) => {
             <th scope="row">{++i}</th>
             <td>{item.name}</td>
             <td>{item.location}</td>
-            <td>{`${moment(item.startDateTime).format('hh:mm a')} a ${moment(item.endDateTime).format('hh:mm a')} `}</td>
+            <td>{displayTime(item.startDateTime, item.endDateTime)}</td>
           </tr>
         </React.Fragment>
       )
