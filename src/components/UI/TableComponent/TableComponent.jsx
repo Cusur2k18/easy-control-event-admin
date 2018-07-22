@@ -30,7 +30,7 @@ export default (props) => {
     
   }
 
-  if (!props.loading) {
+  if (!props.loading && props.items.length) {
     data = props.items.map( (item, i) => {
       return (
         <React.Fragment key={item.id}>
@@ -43,6 +43,16 @@ export default (props) => {
         </React.Fragment>
       )
     })
+  }else {
+    data = (
+      <React.Fragment>
+        <tr onClick={() => {}}>
+          <td scope="row" colSpan="4" className="text-center">
+            <i className="text-muted">No hay datos</i>
+          </td>
+        </tr>
+      </React.Fragment>
+    )
   }
   return (
     <React.Fragment>
