@@ -12,10 +12,11 @@ import Button, { ButtonGroup } from '@atlaskit/button';
 import Tooltip from '@atlaskit/tooltip';
 
 import RichTextEditor from 'react-rte';
+import Simplert from 'react-simplert';
 import Viewer from 'react-viewer';
 
 import { MediaService } from '../../shared/services';
-import { transformImage } from '../../utils';
+import { transformImage, validate } from '../../utils';
 
 import * as eventsActions from '../../store/actions';
 
@@ -77,9 +78,9 @@ export class EventsContainer extends React.Component {
           value: '',
           key: 'coverImg',
           validation: {
-            required: true
+            required: false
           },
-          valid: false,
+          valid: true,
           touched: false
         },
         description: {
@@ -87,15 +88,21 @@ export class EventsContainer extends React.Component {
           key: 'description',
           descriptionText: '',
           validation: {
-            required: true
+            required: false
           },
-          valid: false,
+          valid: true,
           touched: false
         }
       }
     },
     eventThumbnail: null,
-    showImage: false
+    showImage: false,
+    showAlert: false,
+    typeAlert: null,
+    titleAlert: null,
+    messageAlert: null,
+    validForm: false
+
   }
 
   componentDidMount = () => {
@@ -164,13 +171,20 @@ export class EventsContainer extends React.Component {
   formChangeHandler = (value, key) => {
     const updatedControl = {...this.state.form.controls[key]}
     updatedControl.value = value
+    updatedControl.touched = true
+    updatedControl.valid = validate(updatedControl.value, updatedControl.validation)
 
     // Workaround: this is only for the wysiwyg editor
     if (key === 'description') {
       updatedControl.descriptionText = value.toString('markdown')
     }
+    const validInputs = []
+    Object.keys(this.state.form.controls).forEach( k => {
+      validInputs.push(this.state.form.controls[k].valid)
+    })
     this.setState({
       ...this.state,
+      validForm: validInputs.every( valid => valid ),
       form: {
         ...this.state.form,
         controls: {
@@ -255,7 +269,8 @@ export class EventsContainer extends React.Component {
           formHandler={this.formChangeHandler}
           onSubmit={this.onSubmitForm}
           imagePreview={this.state.eventThumbnail}
-          imageClick={this.onOpenImageModal}/>
+          imageClick={this.onOpenImageModal}
+          validForm={this.state.validForm}/>
       );
       gridSelector = null;
     }
@@ -266,6 +281,12 @@ export class EventsContainer extends React.Component {
           visible={this.state.showImage}
           onClose={this.onCloseImageModal}
           images={[{src: this.state.form.controls.coverImg.value, alt: 'Nothing'}]} />
+        <Simplert 
+          showSimplert={ this.state.showAlert }
+          type={ this.state.typeAlert }
+          title={ this.state.titleAlert }
+          message={ this.state.messageAlert }
+        />
         <div id="events-page">
           <div className="row">
             <div className="col-sm-12">

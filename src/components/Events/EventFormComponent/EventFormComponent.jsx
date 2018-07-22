@@ -33,7 +33,12 @@ export default (props) => {
                       compact={true}
                       label="Nombre del evento"
                       shouldFitContainer={true}
+                      isInvalid={(props.controls.name.touched && !props.controls.name.valid) || (props.formSubmitted && !props.controls.name.valid)}
                     />
+                    {
+                      ((props.controls.name.touched && !props.controls.name.valid) || (props.formSubmitted && !props.controls.name.valid)) 
+                        && (<small className="text-danger">Porfavor ingresa el nombre</small>)
+                    }
                   </div>
                 </div>
                 <div className="form-row mt-3">
@@ -44,8 +49,13 @@ export default (props) => {
                       onChange={(e) => {props.formHandler(e.target.value, props.controls.career.key)}}
                       compact={true} 
                       label="Carrera a la que aplica" 
-                      shouldFitContainer={true} 
+                      shouldFitContainer={true}
+                      isInvalid={(props.controls.career.touched && !props.controls.career.valid) || (props.formSubmitted && !props.controls.career.valid)}
                     />
+                    {
+                      ((props.controls.career.touched && !props.controls.career.valid) || (props.formSubmitted && !props.controls.career.valid)) 
+                        && (<small className="text-danger">Porfavor ingresa la carrera para la que aplica</small>)
+                    }
                   </div>
                 </div>
                 <div className="form-row mt-3 mb-3">
@@ -57,7 +67,12 @@ export default (props) => {
                       compact={true} 
                       label="Lugar" 
                       shouldFitContainer={true} 
+                      isInvalid={(props.controls.location.touched && !props.controls.location.valid) || (props.formSubmitted && !props.controls.location.valid)}
                     />
+                    {
+                      ((props.controls.location.touched && !props.controls.location.valid) || (props.formSubmitted && !props.controls.location.valid)) 
+                        && (<small className="text-danger">Porfavor ingresa el lugar</small>)
+                    }
                   </div>
                 </div>
               </div>
@@ -82,7 +97,12 @@ export default (props) => {
                     datePickerSelectProps={{
                       placeholder: 'e.g. 31/Dec/18',
                     }}
+                    isInvalid={(props.controls.startDateTime.touched && !props.controls.startDateTime.valid) || (props.formSubmitted && !props.controls.startDateTime.valid)}
                   />
+                  {
+                    ((props.controls.startDateTime.touched && !props.controls.startDateTime.valid) || (props.formSubmitted && !props.controls.startDateTime.valid)) 
+                      && (<small className="text-danger">Porfavor ingresa la fecha de inicio</small>)
+                  }
                   </div>
                 </div>
                 <div className="form-row">
@@ -95,7 +115,12 @@ export default (props) => {
                     datePickerSelectProps={{
                       placeholder: 'e.g. 31/Dec/18',
                     }}
+                    isInvalid={(props.controls.endDateTime.touched && !props.controls.endDateTime.valid) || (props.formSubmitted && !props.controls.endDateTime.valid)}
                   />
+                  {
+                    ((props.controls.endDateTime.touched && !props.controls.endDateTime.valid) || (props.formSubmitted && !props.controls.endDateTime.valid)) 
+                      && (<small className="text-danger">Porfavor ingresa la fecha de finalizacion</small>)
+                  }
                   </div>
                 </div>
                 <hr/>
@@ -150,8 +175,8 @@ export default (props) => {
 
           <div className="col-sm-12 col-md-12">
             <hr/>
-            <button type="submit" className="btn btn-success">
-              <AddIcon size="small" primaryColor="#28a745" /> Crear Evento
+            <button type="submit" className="btn btn-success" disabled={!props.validForm} >
+              <AddIcon size="small" primaryColor="#28a745"/> Crear Evento
             </button>
           </div>
 

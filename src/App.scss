@@ -108,6 +108,9 @@ body {
   }
 }
 
+.invalid-input {
+  border: 1px solid red;
+}
 
 @keyframes loadingRow{
   0%{
