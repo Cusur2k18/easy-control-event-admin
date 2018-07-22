@@ -217,6 +217,11 @@ export class EventsContainer extends React.Component {
     this.props.onCreateEvent(data);
   }
 
+  onSuccessCreateEvent = () => {
+    this.props.onSuccessUpsert()
+    this.props.history.replace('/events')
+  }
+
   render() {
 
     let contentView = (
@@ -282,10 +287,11 @@ export class EventsContainer extends React.Component {
           onClose={this.onCloseImageModal}
           images={[{src: this.state.form.controls.coverImg.value, alt: 'Nothing'}]} />
         <Simplert 
-          showSimplert={ this.state.showAlert }
-          type={ this.state.typeAlert }
-          title={ this.state.titleAlert }
-          message={ this.state.messageAlert }
+          showSimplert={this.props.successUpsert}
+          type="success"
+          title="Evento creado"
+          message="Se creo el evento correctamente"
+          onClose={this.onSuccessCreateEvent}
         />
         <div id="events-page">
           <div className="row">
@@ -308,12 +314,15 @@ export class EventsContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  loadingForm: state.events.loading.form,
+  successUpsert: state.events.successUpsert
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event))
+    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event)),
+    onSuccessUpsert: () => dispatch(eventsActions.restartForm())
   }
 }
 

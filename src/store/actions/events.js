@@ -36,3 +36,9 @@ export const saveEvent = (event) => {
 
   }
 }
+
+export const restartForm = () => {
+  return {
+    type: eventsType.RESTART_EVENT_FORM
+  }
+}

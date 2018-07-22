@@ -11,5 +11,6 @@ export {
 } from './dashboard'
 
 export {
-  saveEvent
+  saveEvent,
+  restartForm
 } from './events'

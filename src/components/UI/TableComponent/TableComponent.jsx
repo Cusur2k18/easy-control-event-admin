@@ -47,7 +47,7 @@ export default (props) => {
     data = (
       <React.Fragment>
         <tr onClick={() => {}}>
-          <td scope="row" colSpan="4" className="text-center">
+          <td colSpan="4" className="text-center">
             <i className="text-muted">No hay datos</i>
           </td>
         </tr>

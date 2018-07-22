@@ -6,7 +6,8 @@ const initialState = {
   loading: {
     index: false,
     form: false
-  }
+  },
+  successUpsert: false
 }
 
 const eventsReducer = (state=initialState, action) => {
@@ -59,7 +60,8 @@ const eventsReducer = (state=initialState, action) => {
         loading: {
           ...state.loading,
           form: false
-        }
+        },
+        successUpsert: true
       }
 
     case eventsActionsTypes.UPSERT_EVENT_FAIL:
@@ -69,7 +71,18 @@ const eventsReducer = (state=initialState, action) => {
         loading: {
           ...state.loading,
           form: false
-        }
+        },
+        successUpsert: false
+      }
+    case eventsActionsTypes.RESTART_EVENT_FORM:
+      return {
+        ...state,
+        error: null,
+        loading: {
+          index: false,
+          form: false
+        },
+        successUpsert: false
       }
 
     default:
