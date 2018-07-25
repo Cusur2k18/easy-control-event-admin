@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 
 import * as authActions from '../../store/actions';
+import { isAuth } from '../../utils'
 
 import Spinner from '@atlaskit/spinner';
 import EditorWarningIcon from '@atlaskit/icon/glyph/editor/warning';
@@ -69,7 +70,7 @@ export class AuthContainer extends React.Component {
       )
     }
 
-    if (this.props.isLoggedIn) {
+    if (isAuth()) {
       return <Redirect to="/" />;
     }
     
