@@ -12,5 +12,6 @@ export {
 
 export {
   saveEvent,
-  restartForm
+  restartForm,
+  getEvents
 } from './events'

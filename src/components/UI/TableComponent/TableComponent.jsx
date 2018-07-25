@@ -16,20 +16,6 @@ export default (props) => {
   
   let data = []
 
-  for (let i = 0; i < 5; i++) {
-    data.push((
-      <React.Fragment key={i}>
-        <tr onClick={() => {}}>
-          <th scope="row"><div className="th-table-loading extra">&nbsp;</div></th>
-          <td><div className="th-table-loading">&nbsp;</div></td>
-          <td><div className="th-table-loading">&nbsp;</div></td>
-          <td><div className="th-table-loading">&nbsp;</div></td>
-        </tr>
-      </React.Fragment>
-    ));
-    
-  }
-
   if (!props.loading && props.items.length) {
     data = props.items.map( (item, i) => {
       return (
@@ -43,7 +29,20 @@ export default (props) => {
         </React.Fragment>
       )
     })
-  }else {
+  } else if(props.loading) {
+    for (let i = 0; i < 5; i++) {
+      data.push((
+        <React.Fragment key={i}>
+          <tr onClick={() => {}}>
+            <th scope="row"><div className="th-table-loading extra">&nbsp;</div></th>
+            <td><div className="th-table-loading">&nbsp;</div></td>
+            <td><div className="th-table-loading">&nbsp;</div></td>
+            <td><div className="th-table-loading">&nbsp;</div></td>
+          </tr>
+        </React.Fragment>
+      ));
+    }
+  } else {
     data = (
       <React.Fragment>
         <tr onClick={() => {}}>

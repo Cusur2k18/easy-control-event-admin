@@ -5,6 +5,7 @@ export { default as ThumbView } from './UI/ThumbView/ThumbView';
 export { default as ActionButton } from './UI/ActionButton/ActionButton';
 export { default as ConfigRow } from './UI/ConfigRow/ConfigRow';
 export { default as ImageComponent } from './UI/ImageComponent/ImageComponent';
+export { default as DateRangePicker } from './UI/DateRangeWrapper/DateRangeWrapper';
 
 // Navigation
 export { default as PrivateRoute } from './Navigation/PrivateRoute/PrivateRoute';

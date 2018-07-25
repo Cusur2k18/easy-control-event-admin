@@ -18,6 +18,7 @@ const eventsReducer = (state=initialState, action) => {
     case eventsActionsTypes.INIT_EVENTS:
       return {
         ...state,
+        events: [],
         loading: {
           ...state.loading,
           index: true
@@ -28,6 +29,7 @@ const eventsReducer = (state=initialState, action) => {
       return {
         ...state,
         error: null,
+        events: action.events,
         loading: {
           ...state.loading,
           index: false
@@ -38,6 +40,7 @@ const eventsReducer = (state=initialState, action) => {
       return {
         ...state,
         error: action.error,
+        events: [],
         loading: {
           ...state.loading,
           index: false

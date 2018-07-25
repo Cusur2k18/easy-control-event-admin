@@ -14,6 +14,7 @@ import Tooltip from '@atlaskit/tooltip';
 import RichTextEditor from 'react-rte';
 import Simplert from 'react-simplert';
 import Viewer from 'react-viewer';
+import * as moment from 'moment'
 
 import { MediaService } from '../../shared/services';
 import { transformImage, validate } from '../../utils';
@@ -111,6 +112,8 @@ export class EventsContainer extends React.Component {
       isShow: !!this.props.match.params.id,
       isCreate: this.props.match.path.indexOf('/events/create') >= 0
     })
+
+    this.props.onGetAllEvents()
   }
   
   
@@ -132,8 +135,8 @@ export class EventsContainer extends React.Component {
     this.setState({ activeView })
   }
 
-  handleClickElement = (id) => {
-    this.props.history.push(`/events/${id}`);
+  handleClickElement = (event) => {
+    this.props.history.push(`/events/${event.id}`);
   }
 
   onCreateEvent = () => {
@@ -222,10 +225,21 @@ export class EventsContainer extends React.Component {
     this.props.history.replace('/events')
   }
 
+  // Index Page Methods
+  onGetFilteredEvents = (from, to) => {
+    if (!!(from && to)) {
+      this.props.onGetAllEvents(moment(from).format(), moment(to).format())
+    }
+    
+  }
+
   render() {
 
     let contentView = (
       <EventsComponent 
+        events={this.props.filteredEvents || []}
+        loading={this.props.filteredEventsLoading}
+        onChangeDateHandler={this.onGetFilteredEvents}
         activeView={this.state.activeView}
         click={this.handleClickElement} />
     );
@@ -316,13 +330,16 @@ export class EventsContainer extends React.Component {
 const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser,
   loadingForm: state.events.loading.form,
-  successUpsert: state.events.successUpsert
+  successUpsert: state.events.successUpsert,
+  filteredEvents: state.events.events,
+  filteredEventsLoading: state.events.loading.index
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event)),
-    onSuccessUpsert: () => dispatch(eventsActions.restartForm())
+    onGetAllEvents: (from, to) => dispatch(eventsActions.getEvents(from, to)),
+    onSuccessUpsert: () => dispatch(eventsActions.restartForm()),
+    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event))
   }
 }
 
