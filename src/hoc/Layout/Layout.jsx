@@ -23,7 +23,7 @@ export class Layout extends React.Component {
             {this.props.children}
           </div>
         </Page>
-        <div className={this.props.isLoggedIn ? 'footer' : 'footer pos-l-0'}>
+        <div className={this.props.isLoggedIn ? 'footer container' : 'footer pos-l-0'}>
           <i> - Universidad de Guadalajara &reg; - </i>
         </div>
       </div>
