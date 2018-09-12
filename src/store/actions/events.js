@@ -18,6 +18,26 @@ const getEventsSuccess = (events) => {
   }
 }
 
+const getEventDetailSuccess = (event) => {
+  return {
+    type: eventsType.EVENT_DETAIL_SUCCESS,
+    event
+  }
+}
+
+const getEventDetailStart = () => {
+  return {
+    type: eventsType.INIT_EVENT_DETAIL
+  }
+}
+
+const getEventDetailError = (error) => {
+  return {
+    type: eventsType.EVENT_DETAIL_FAIL,
+    error
+  }
+}
+
 export const getEvents = (from, to) => {
   return dispatch => {
     dispatch(getEventsStart())
@@ -32,6 +52,27 @@ export const getEvents = (from, to) => {
           dispatch(getEventsSuccess(res.data));
         // Success call
 
+        } else if (res.status === 401) {
+          // Todo: Add a toaster for handling errors
+        }
+      })
+  }
+}
+
+export const getEventByUuid = (uuid) => {
+  return dispatch => {
+    dispatch(getEventDetailStart())
+    
+    let userInfo = JSON.parse(localStorage.getItem('user'))
+  
+    AccountService.getEventByUuid(userInfo.accountId, uuid)
+      .then( res => {
+        console.log('single event', res);
+  
+        if (res.status === 200) {
+          dispatch(getEventDetailSuccess(res.data[0]));
+        // Success call
+  
         } else if (res.status === 401) {
           // Todo: Add a toaster for handling errors
         }

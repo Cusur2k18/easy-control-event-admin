@@ -84,4 +84,15 @@ export class AccountService extends BaseApiService {
       .then( response => parseRequest(response) )
       .catch( error => parseRequest(error) );
   }
+
+  static getEventByUuid(accountId, uuid) {
+    const filter = JSON.stringify({
+      "where": {"uuid": uuid},
+      "include": "students"
+    })
+
+    return api.get(`${this.baseUrl()}/${accountId}/events?filter=${filter}`)
+      .then( response => parseRequest(response) )
+      .catch( error => parseRequest(error) );
+  }
 }

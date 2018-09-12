@@ -111,9 +111,14 @@ export class EventsContainer extends React.Component {
       ...this.state,
       isShow: !!this.props.match.params.id,
       isCreate: this.props.match.path.indexOf('/events/create') >= 0
+    }, () => {
+      if (this.state.isShow) {
+        this.props.getByUuid(this.props.match.params.id)
+      } else {
+        this.props.onGetAllEvents()
+      }
     })
 
-    this.props.onGetAllEvents()
   }
   
   
@@ -122,6 +127,12 @@ export class EventsContainer extends React.Component {
       this.setState({
         isShow: !!this.props.match.params.id,
         isCreate: this.props.match.path.indexOf('/events/create') >= 0
+      }, () => {
+        if (this.state.isShow) {
+          this.props.getByUuid(this.props.match.params.id)
+        } else {
+          this.props.onGetAllEvents()
+        }
       })
     }
   }
@@ -136,7 +147,7 @@ export class EventsContainer extends React.Component {
   }
 
   handleClickElement = (event) => {
-    this.props.history.push(`/events/${event.id}`);
+    this.props.history.push(`/events/${event.uuid}`);
   }
 
   onCreateEvent = () => {
@@ -276,7 +287,7 @@ export class EventsContainer extends React.Component {
     );
 
     if (this.state.isShow) {
-      contentView = <EventDetailComponent />;
+      contentView = <EventDetailComponent event={this.props.singleEvent || {}} loading={this.props.singleEventLoading} />;
       gridSelector = null;
     }
 
@@ -332,12 +343,15 @@ const mapStateToProps = (state) => ({
   loadingForm: state.events.loading.form,
   successUpsert: state.events.successUpsert,
   filteredEvents: state.events.events,
-  filteredEventsLoading: state.events.loading.index
+  filteredEventsLoading: state.events.loading.index,
+  singleEvent: state.events.singleEvent,
+  singleEventLoading: state.events.loading.details
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     onGetAllEvents: (from, to) => dispatch(eventsActions.getEvents(from, to)),
+    getByUuid: (uuid) => dispatch(eventsActions.getEventByUuid(uuid)),
     onSuccessUpsert: () => dispatch(eventsActions.restartForm()),
     onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event))
   }

@@ -2,10 +2,12 @@ import * as eventsActionsTypes from '../actions/actionTypes';
 
 const initialState = {
   events: null,
+  singleEvent: null,
   error: null,
   loading: {
     index: false,
-    form: false
+    form: false,
+    details: false
   },
   successUpsert: false
 }
@@ -13,6 +15,38 @@ const initialState = {
 const eventsReducer = (state=initialState, action) => {
 
   switch (action.type) {
+
+    // Event Detail
+    case eventsActionsTypes.INIT_EVENT_DETAIL:
+      return {
+        ...state,
+        error: null,
+        singleEvent: {},
+        loading: {
+          ...state.loading,
+          details: true
+        }
+      }
+    case eventsActionsTypes.EVENT_DETAIL_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        singleEvent: action.event,
+        loading: {
+          ...state.loading,
+          details: false
+        }
+      }
+    case eventsActionsTypes.EVENT_DETAIL_FAIL:
+      return {
+        ...state,
+        error: action.error,
+        singleEvent: {},
+        loading: {
+          ...state.loading,
+          details: false
+        }
+      }
 
     // Today events
     case eventsActionsTypes.INIT_EVENTS:
