@@ -5,7 +5,6 @@ import EventIcon from '@atlaskit/icon/glyph/objects/16/event';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import UserIcon from '@atlaskit/icon/glyph/objects/24/user';
 import SignOutIcon from '@atlaskit/icon/glyph/sign-out';
-import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import DocIcon from '@atlaskit/icon/glyph/tray';
 import BugIcon from '@atlaskit/icon/glyph/jira/test-session';
 
@@ -28,7 +27,6 @@ export const SideBarMenuItems = [
 
 // This are the configuration items from the administration page
 export const ConfigurationItems = [
-  { id: 1, description: 'Usuarios de Division', icon: <PeopleGroupIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/admin/people'  },
   { id: 2, description: 'Constancias', icon: <DocIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/admin/diplomas'  },
   { id: 3, description: 'Reportar un Bug', icon: <BugIcon size="xlarge" primaryColor="#b1b1b1" />, url: '/bug'  }
 ]

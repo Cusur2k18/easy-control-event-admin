@@ -7,7 +7,7 @@ export default (props) => {
   const items = configurationItems.map( c => {
     return (
       <React.Fragment key={c.id}>
-        <div className="col-sm-4 col-md-4" onClick={() => props.onConfigClick(c.url) }>
+        <div className="col-sm-6 col-md-6" onClick={() => props.onConfigClick(c.url) }>
           <div className="row justify-content-center right-gray-border">
             <div className="config-item">
               <div className="col-12 config-item-icon">
