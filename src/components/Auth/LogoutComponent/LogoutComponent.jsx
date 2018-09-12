@@ -7,8 +7,10 @@ import * as logoutActions from '../../../store/actions';
 export class LogoutComponent extends React.Component {
 
   componentDidMount = () => {
+    const token = localStorage.getItem('token')
     localStorage.clear();
-    this.props.onLogout();
+    console.log('TCL: logout -> token', token);
+    this.props.onLogout(token);
   }
   
   render() {
@@ -20,7 +22,7 @@ export class LogoutComponent extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch(logoutActions.logout())
+    onLogout: (token) => dispatch(logoutActions.logout(token))
   }
 }
 

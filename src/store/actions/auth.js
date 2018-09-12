@@ -77,7 +77,6 @@ export const autoSignIn = () => {
 
         dispatch(loginSuccess(userData))
       } else {
-        localStorage.clear();
         dispatch(logout());
       }
     }
@@ -85,7 +84,16 @@ export const autoSignIn = () => {
 }
 
 
-export const logout = () => {
+export const logout = (token) => {
+  AuthService.logout(token)
+    .then( () => {
+      console.log('Logout successfully')
+    })
+    .catch(err => {
+      console.error('Logout error: ', err)
+    })
+
+  
   return {
     type: authTypes.LOGOUT_SUCCESS
   }
