@@ -113,9 +113,9 @@ export class EventsContainer extends React.Component {
       ...this.state,
       isShow: !!this.props.match.params.id,
       isCreate: this.props.match.path.indexOf('/events/create') >= 0,
-      isEdit: this.props.match.path.indexOf('edit') >= 0
+      isEdit: this.props.location.search
     }, () => {
-      if (this.state.isShow) {
+      if (this.state.isShow || this.state.isEdit) {
         this.props.getByUuid(this.props.match.params.id)
       } else {
         this.props.onGetAllEvents()
@@ -128,13 +128,13 @@ export class EventsContainer extends React.Component {
   componentDidUpdate = (prevProps) => {
     if (this.componentDidChange(prevProps)) {
       this.setState({
-        isShow: !!this.props.match.params.id && !(this.props.match.path.indexOf('edit') >= 0),
-        isCreate: this.props.match.path.indexOf('/events/create') >= 0
+        isShow: !!this.props.match.params.id,
+        isCreate: this.props.match.path.indexOf('/events/create') >= 0,
+        isEdit: this.props.location.search
       }, () => {
-        if (this.state.isShow) {
+        if (this.state.isShow || this.state.isEdit) {
           this.props.getByUuid(this.props.match.params.id)
         } else {
-          console.log('se trae todos')
           this.props.onGetAllEvents()
         }
       })
@@ -160,6 +160,10 @@ export class EventsContainer extends React.Component {
 
   onEditHandler = (event) => {
     console.log('TCL: EventsContainer -> onEditHandler -> event', this.props.singleEvent);
+    this.props.history.push({
+      pathname: `/events/${event.uuid}`,
+      search: 'isEdit=true'
+    });
     this.updateEditForm(event);
   }
 
