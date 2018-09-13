@@ -117,6 +117,21 @@ export const saveEvent = (event) => {
   }
 }
 
+export const updateEvent = (event) => {
+  return dispatch => {
+    dispatch(eventSaveStart());
+
+
+    EventsService.update(event)
+      .then( res => {
+        console.log(res);
+        dispatch(eventSaveSuccess());
+      })
+
+
+  }
+}
+
 export const restartForm = () => {
   return {
     type: eventsType.RESTART_EVENT_FORM

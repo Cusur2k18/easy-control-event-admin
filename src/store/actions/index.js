@@ -12,6 +12,7 @@ export {
 
 export {
   saveEvent,
+  updateEvent,
   restartForm,
   getEvents,
   getEventByUuid

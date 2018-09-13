@@ -9,4 +9,10 @@ export class EventsService {
       .then( response => parseRequest(response) )
       .catch( error => parseRequest(error) );
   }
+
+  static update = (event) => {
+    return api.put(EventsService.url, event)
+      .then( response => parseRequest(response) )
+      .catch( error => parseRequest(error) );
+  }
 }

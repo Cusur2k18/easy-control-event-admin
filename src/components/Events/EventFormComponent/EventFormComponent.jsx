@@ -5,12 +5,26 @@ import { DateTimePicker } from '@atlaskit/datetime-picker';
 import { Label } from '@atlaskit/field-base';
 import ImageIcon from '@atlaskit/icon/glyph/image';
 import AddIcon from '@atlaskit/icon/glyph/add-circle';
+import EditIcon from '@atlaskit/icon/glyph/edit-filled';
 
 import RichTextEditor from 'react-rte';
 
 import { ImageComponent } from '../../'
 
 export default (props) => {
+
+  let action = (
+    <button type="submit" className="btn btn-success" disabled={!props.validForm} >
+      <AddIcon size="small" primaryColor="#28a745"/> Crear Evento
+    </button>
+  )
+
+  console.log('props.isEditing', props.isEditing)
+  if (props.isEditing) {
+    action = <button type="submit" className="btn btn-warning" disabled={!props.validForm} >
+      <EditIcon size="small" primaryColor="#212529"/> Editar Evento
+    </button>
+  }
 
   return (
     <div className="col-sm-12">
@@ -175,9 +189,7 @@ export default (props) => {
 
           <div className="col-sm-12 col-md-12">
             <hr/>
-            <button type="submit" className="btn btn-success" disabled={!props.validForm} >
-              <AddIcon size="small" primaryColor="#28a745"/> Crear Evento
-            </button>
+            {action}
           </div>
 
         </div>

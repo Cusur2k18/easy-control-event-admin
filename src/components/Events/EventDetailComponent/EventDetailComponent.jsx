@@ -44,12 +44,12 @@ export default (props) => {
                     <div className="row text-center">
                       <div className="col-6">
                         <Tooltip content="Editar evento" delay={300} position="top">
-                          <ActionButton type="edit" />
+                          <ActionButton type="edit" click={() => {props.onEdit(event)}} />
                         </Tooltip>
                       </div>
                       <div className="col-6">
                         <Tooltip content="Borrar Evento" delay={300} position="top">
-                        <ActionButton type="delete" />
+                        <ActionButton type="delete" click={() => {props.onDelete(event.uuid)}} />
                         </Tooltip>
                       </div>
                     </div>

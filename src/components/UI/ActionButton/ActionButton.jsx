@@ -10,14 +10,14 @@ export default (props) => {
     case 'edit':
     cssClasses.push('btn-warning')
       btn = (
-        <button type="button" className="btn-lg btn-warning" onClick={props.click}>
+        <button type="button" className="btn-lg btn-warning item-clickable" onClick={props.click}>
           <EditIcon size="large"/>
         </button>
       )
       break;
     case 'delete': 
       btn = (
-        <button type="button" className="btn-lg btn-danger" onClick={props.click}>
+        <button type="button" className="btn-lg btn-danger item-clickable" onClick={props.click}>
           <TrashIcon size="large" />
         </button>
       )

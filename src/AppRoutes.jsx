@@ -28,6 +28,7 @@ export class AppRoutes extends React.Component {
         
         <PrivateRoute exact authed={isAuth()} path="/events" component={EventsContainer} />
         <PrivateRoute exact authed={isAuth()} path="/events/create" component={EventsContainer} />
+        <PrivateRoute exact authed={isAuth()} path="/events/edit/:id" component={EventsContainer} />
         <PrivateRoute exact authed={isAuth()} path="/events/:id" component={EventsContainer} />
         <Route path="/login" component={AuthContainer}/>
         <Route path="/logout" component={LogoutComponent}/>

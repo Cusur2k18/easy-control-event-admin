@@ -28,6 +28,8 @@ export class EventsContainer extends React.Component {
   state = {
     activeView: 'table',
     isShow: false,
+    isEdit: false,
+    isCreate:false,
     form: {
       controls: {
         name: {
@@ -110,7 +112,8 @@ export class EventsContainer extends React.Component {
     this.setState({
       ...this.state,
       isShow: !!this.props.match.params.id,
-      isCreate: this.props.match.path.indexOf('/events/create') >= 0
+      isCreate: this.props.match.path.indexOf('/events/create') >= 0,
+      isEdit: this.props.match.path.indexOf('edit') >= 0
     }, () => {
       if (this.state.isShow) {
         this.props.getByUuid(this.props.match.params.id)
@@ -125,12 +128,13 @@ export class EventsContainer extends React.Component {
   componentDidUpdate = (prevProps) => {
     if (this.componentDidChange(prevProps)) {
       this.setState({
-        isShow: !!this.props.match.params.id,
+        isShow: !!this.props.match.params.id && !(this.props.match.path.indexOf('edit') >= 0),
         isCreate: this.props.match.path.indexOf('/events/create') >= 0
       }, () => {
         if (this.state.isShow) {
           this.props.getByUuid(this.props.match.params.id)
         } else {
+          console.log('se trae todos')
           this.props.onGetAllEvents()
         }
       })
@@ -152,6 +156,83 @@ export class EventsContainer extends React.Component {
 
   onCreateEvent = () => {
     this.props.history.push(`/events/create`);
+  }
+
+  onEditHandler = (event) => {
+    console.log('TCL: EventsContainer -> onEditHandler -> event', this.props.singleEvent);
+    this.updateEditForm(event);
+  }
+
+  updateEditForm = (event) => {
+    this.setState({
+      ...this.state,
+      form: {
+        ...this.state.form,
+        controls: {
+          ...this.state.form.controls,
+          name: {
+            ...this.state.form.controls.name,
+            validation: {
+              ...this.state.form.controls.name.validation
+            },
+            valid: true,
+            value: event.name
+          },
+          career: {
+            ...this.state.form.controls.career,
+            validation: {
+              ...this.state.form.controls.career.validation
+            },
+            valid: true,
+            value: event.career
+          },
+          location: {
+            ...this.state.form.controls.location,
+            validation: {
+              ...this.state.form.controls.location.validation
+            },
+            valid: true,
+            value: event.location
+          },
+          startDateTime: {
+            ...this.state.form.controls.startDateTime,
+            validation: {
+              ...this.state.form.controls.startDateTime.validation
+            },
+            valid: true,
+            value: event.startDateTime
+          },
+          endDateTime: {
+            ...this.state.form.controls.endDateTime,
+            validation: {
+              ...this.state.form.controls.endDateTime.validation
+            },
+            valid: true,
+            value: event.endDateTime
+          },
+          coverImg: {
+            ...this.state.form.controls.coverImg,
+            validation: {
+              ...this.state.form.controls.coverImg.validation
+            },
+            valid: true,
+            value: event.coverImg
+          },
+          description: {
+            ...this.state.form.controls.description,
+            validation: {
+              ...this.state.form.controls.description.validation
+            },
+            valid: true,
+            value: event.description ? RichTextEditor.createValueFromString(event.description, 'markdown') : RichTextEditor.createEmptyValue(),
+            descriptionText: event.description ? event.description : ''
+          }
+        }
+      },
+      eventThumbnail: transformImage(event.coverImg ? event.coverImg : '', 'thumb'),
+      validForm: true,
+      isEdit: true
+    })
   }
   
   showUploader = () => {
@@ -176,7 +257,8 @@ export class EventsContainer extends React.Component {
             }
           }
         },
-        eventThumbnail: transformImage(data.secure_url, 'thumb')
+        eventThumbnail: transformImage(data.secure_url, 'thumb'),
+        validForm: true
       })
     })
 
@@ -228,7 +310,13 @@ export class EventsContainer extends React.Component {
       }
     })
     data.accountId = this.props.currentUser.accountId
-    this.props.onCreateEvent(data);
+    if (this.state.isEdit) {
+      data.id = this.props.singleEvent.id
+      console.log(data);
+      this.props.onUpdateEvent(data)
+    } else {
+      this.props.onCreateEvent(data);
+    }
   }
 
   onSuccessCreateEvent = () => {
@@ -246,6 +334,7 @@ export class EventsContainer extends React.Component {
 
   render() {
 
+    // Index Event
     let contentView = (
       <EventsComponent 
         events={this.props.filteredEvents || []}
@@ -286,12 +375,22 @@ export class EventsContainer extends React.Component {
       </React.Fragment>
     );
 
+
+    // Event Detail
     if (this.state.isShow) {
-      contentView = <EventDetailComponent event={this.props.singleEvent || {}} loading={this.props.singleEventLoading} />;
+      contentView = (
+        <EventDetailComponent 
+          event={this.props.singleEvent || {}} 
+          loading={this.props.singleEventLoading}
+          onEdit={this.onEditHandler}
+          onDelete={this.onDeleteHandler} />
+        );
       gridSelector = null;
     }
 
-    if (this.state.isCreate) {
+
+    // Event Form
+    if (this.state.isCreate || this.state.isEdit) {
       contentView = (
         <EventFormComponent 
           click={this.showUploader} 
@@ -300,7 +399,8 @@ export class EventsContainer extends React.Component {
           onSubmit={this.onSubmitForm}
           imagePreview={this.state.eventThumbnail}
           imageClick={this.onOpenImageModal}
-          validForm={this.state.validForm}/>
+          validForm={this.state.validForm}
+          isEditing={this.state.isEdit}/>
       );
       gridSelector = null;
     }
@@ -314,8 +414,8 @@ export class EventsContainer extends React.Component {
         <Simplert 
           showSimplert={this.props.successUpsert}
           type="success"
-          title="Evento creado"
-          message="Se creo el evento correctamente"
+          title={this.state.isEdit ? "Evento Actualizado" :"Evento creado"}
+          message={this.state.isEdit ? "Se actualizo el evento correctamente" : "Se creo el evento correctamente"}
           onClose={this.onSuccessCreateEvent}
         />
         <div id="events-page">
@@ -353,7 +453,8 @@ const mapDispatchToProps = dispatch => {
     onGetAllEvents: (from, to) => dispatch(eventsActions.getEvents(from, to)),
     getByUuid: (uuid) => dispatch(eventsActions.getEventByUuid(uuid)),
     onSuccessUpsert: () => dispatch(eventsActions.restartForm()),
-    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event))
+    onCreateEvent: (event) => dispatch(eventsActions.saveEvent(event)),
+    onUpdateEvent: (event) => dispatch(eventsActions.updateEvent(event))
   }
 }
 
