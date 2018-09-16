@@ -113,6 +113,14 @@ body {
   border: 1px solid red;
 }
 
+.strong-divider {
+  height: 5px;
+  background: black;
+  &:last-child {
+    background: transparent;
+  }
+}
+
 @keyframes loadingRow{
   0%{
       background-position: -468px 0

@@ -26,3 +26,4 @@ export { default as PeopleFormComponent } from './Admin/PeopleFormComponent/Peop
 export { default as EventsComponent } from './Events/EventsComponent/EventsComponent';
 export { default as EventDetailComponent } from './Events/EventDetailComponent/EventDetailComponent';
 export { default as EventFormComponent } from './Events/EventFormComponent/EventFormComponent';
+export { default as EventEnrollment } from './Events/EventEnrollment/EventEnrollment';

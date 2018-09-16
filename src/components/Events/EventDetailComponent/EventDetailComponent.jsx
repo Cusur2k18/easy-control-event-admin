@@ -8,9 +8,11 @@ import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import ActiveIcon from '@atlaskit/icon/glyph/presence-active';
 import Tooltip from '@atlaskit/tooltip';
 import Spinner from '@atlaskit/spinner'
+import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
 import RCTMarkdown from 'react-markdown';
 
 import ActionButton from '../../UI/ActionButton/ActionButton';
+import EventEnrollment from '../EventEnrollment/EventEnrollment'
 
 export default (props) => {
   const { event } = props
@@ -49,7 +51,7 @@ export default (props) => {
                       </div>
                       <div className="col-6">
                         <Tooltip content="Borrar Evento" delay={300} position="top">
-                        <ActionButton type="delete" click={() => {props.onDelete(event.uuid)}} />
+                          <ActionButton type="delete" click={() => {props.onDelete(event.uuid)}} />
                         </Tooltip>
                       </div>
                     </div>
@@ -71,6 +73,11 @@ export default (props) => {
                     </li>
                     <li className="schedule-list-item">
                       <PeopleGroupIcon size="medium"/> Usuarios registrados: <span className="badge badge-primary">{event.students && event.students.length}</span>
+                      <br />
+                      <br />
+                      <ActionButton type="info" click={props.toggleEnrollments}>
+                        Mostrar Usuarios
+                      </ActionButton>
                     </li>
                   </ul>
                 </div>
@@ -79,6 +86,13 @@ export default (props) => {
           </div>
         </div>
       </div>
+
+      <ModalTransition>
+        {props.showEnrollments && (
+          <ModalDialog heading="Usuarios" onClose={props.toggleEnrollments} className="btn-success">
+            <EventEnrollment users={event.students ? event.students : []}/>
+          </ModalDialog>)}
+      </ModalTransition>
     </React.Fragment>
   )
 

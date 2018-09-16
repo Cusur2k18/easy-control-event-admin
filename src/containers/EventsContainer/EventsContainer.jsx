@@ -104,8 +104,8 @@ export class EventsContainer extends React.Component {
     typeAlert: null,
     titleAlert: null,
     messageAlert: null,
-    validForm: false
-
+    validForm: false,
+    showEnrollments: false
   }
 
   componentDidMount = () => {
@@ -328,12 +328,107 @@ export class EventsContainer extends React.Component {
     this.props.history.replace('/events')
   }
 
+  cancelEdit = () => {
+    this.setState({
+      activeView: 'table',
+      isShow: false,
+      isEdit: false,
+      isCreate:false,
+      form: {
+        controls: {
+          name: {
+            value: '',
+            key: 'name',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          career: {
+            value: '',
+            key: 'career',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          location: {
+            value: '',
+            key: 'location',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          startDateTime: {
+            value: '',
+            key: 'startDateTime',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          endDateTime: {
+            value: '',
+            key: 'endDateTime',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          coverImg: {
+            value: '',
+            key: 'coverImg',
+            validation: {
+              required: false
+            },
+            valid: true,
+            touched: false
+          },
+          description: {
+            value: RichTextEditor.createEmptyValue(),
+            key: 'description',
+            descriptionText: '',
+            validation: {
+              required: false
+            },
+            valid: true,
+            touched: false
+          }
+        }
+      },
+      eventThumbnail: null,
+      showImage: false,
+      showAlert: false,
+      typeAlert: null,
+      titleAlert: null,
+      messageAlert: null,
+      validForm: false,
+      showEnrollments: false
+    }, () => {
+      this.props.history.replace('/events')
+    })
+  }
+
   // Index Page Methods
   onGetFilteredEvents = (from, to) => {
     if (!!(from && to)) {
       this.props.onGetAllEvents(moment(from).format(), moment(to).format())
     }
     
+  }
+
+  onToggleEnrollmentsHandler = () => {
+    this.setState((oldState) => {
+      return {
+        showEnrollments: !oldState.showEnrollments
+      }
+    })
   }
 
   render() {
@@ -387,7 +482,9 @@ export class EventsContainer extends React.Component {
           event={this.props.singleEvent || {}} 
           loading={this.props.singleEventLoading}
           onEdit={this.onEditHandler}
-          onDelete={this.onDeleteHandler} />
+          onDelete={this.onDeleteHandler}
+          showEnrollments={this.state.showEnrollments}
+          toggleEnrollments={this.onToggleEnrollmentsHandler} />
         );
       gridSelector = null;
     }
@@ -404,7 +501,8 @@ export class EventsContainer extends React.Component {
           imagePreview={this.state.eventThumbnail}
           imageClick={this.onOpenImageModal}
           validForm={this.state.validForm}
-          isEditing={this.state.isEdit}/>
+          isEditing={this.state.isEdit}
+          cancel={this.cancelEdit}/>
       );
       gridSelector = null;
     }

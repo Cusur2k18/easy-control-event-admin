@@ -6,6 +6,7 @@ import { Label } from '@atlaskit/field-base';
 import ImageIcon from '@atlaskit/icon/glyph/image';
 import AddIcon from '@atlaskit/icon/glyph/add-circle';
 import EditIcon from '@atlaskit/icon/glyph/edit-filled';
+import CancelIcon from '@atlaskit/icon/glyph/cross-circle';
 
 import RichTextEditor from 'react-rte';
 
@@ -21,9 +22,16 @@ export default (props) => {
 
   console.log('props.isEditing', props.isEditing)
   if (props.isEditing) {
-    action = <button type="submit" className="btn btn-warning" disabled={!props.validForm} >
-      <EditIcon size="small" primaryColor="#212529"/> Editar Evento
-    </button>
+    action = (
+      <React.Fragment>
+        <button type="submit" className="btn btn-warning" disabled={!props.validForm} >
+          <EditIcon size="small" primaryColor="#212529"/> Editar Evento
+        </button>
+        <button type="button" className="btn btn-danger ml-3" onClick={props.cancel} >
+          <CancelIcon size="small" primaryColor="#ff5630"/> Cancelar
+        </button>
+    </React.Fragment>
+    )
   }
 
   return (

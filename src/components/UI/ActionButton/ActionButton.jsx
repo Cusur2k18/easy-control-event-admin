@@ -22,10 +22,24 @@ export default (props) => {
         </button>
       )
       break;
+    case 'success': 
+      btn = (
+        <button type="button" className="btn-sm btn-success item-clickable" onClick={props.click}>
+          {props.children}
+        </button>
+      )
+      break;
+    case 'info': 
+      btn = (
+        <button type="button" className="btn-sm btn-info item-clickable" onClick={props.click}>
+          {props.children}
+        </button>
+      )
+      break;
   
     default:
       btn = (
-        <button type="button" className={props.cssClass} onClick={props.click}>
+        <button type="button" className={props.cssClass} onClick={props.click} {...props}>
           {props.children}
         </button>
       )
