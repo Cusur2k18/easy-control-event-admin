@@ -10,7 +10,6 @@ import * as actions from './store/actions';
 class App extends React.Component {
 
   componentDidMount = () => {
-
     // Try to login on refresh browse window.
     this.props.onAutoSignIn();
   }

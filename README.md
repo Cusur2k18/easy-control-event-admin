@@ -11,7 +11,7 @@ git clone
 Then install the dependencies
 
 ```bash
-npm install && yarn install
+npm install
 ```
 
 After that create a '.env` in the root directory file with the following;
