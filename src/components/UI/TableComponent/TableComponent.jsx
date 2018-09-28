@@ -24,7 +24,7 @@ export default (props) => {
             <th scope="row">{++i}</th>
             <td>{item.name}</td>
             <td>{item.location}</td>
-            <td>{displayTime(item.startDateTime, item.endDateTime)}</td>
+            <td className="text-right">{displayTime(item.startDateTime, item.endDateTime)}</td>
           </tr>
         </React.Fragment>
       )
@@ -61,7 +61,7 @@ export default (props) => {
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Lugar</th>
-            <th scope="col">Hora</th>
+            <th scope="col" className="text-center">Hora</th>
           </tr>
         </thead>
         <tbody>

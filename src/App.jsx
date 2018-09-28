@@ -6,6 +6,9 @@ import './App.scss';
 import Layout from './hoc/Layout/Layout';
 import AppRoutes from './AppRoutes';
 import * as actions from './store/actions';
+import * as moment from 'moment';
+import 'moment/locale/es.js';
+moment.locale('es');
 
 class App extends React.Component {
 
