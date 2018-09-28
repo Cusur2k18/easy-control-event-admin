@@ -114,6 +114,19 @@ body {
   font-weight: bold;
 }
 
+.card-img-top {
+  max-height: 200px;
+}
+
+.card-text-title {
+  background: #e3e3e3;
+  font-weight: bold;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
 .invalid-input {
   border: 1px solid red;
 }
