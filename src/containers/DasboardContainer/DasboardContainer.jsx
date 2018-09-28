@@ -95,7 +95,8 @@ export class DasboardContainer extends React.Component {
                     }}
                     startAccessor='startDateTime'
                     endAccessor='endDateTime'
-                    titleAccessor="name" />
+                    titleAccessor="name"
+                    defaultDate={moment().toDate()} />
                   {this.props.filteredLoading && (<div className="loading-container b-40 d-flex align-items-center justify-content-center">
                     <div className="loading">
                       <Spinner size="large" />
