@@ -19,7 +19,7 @@ export const SideBarMenuItems = [
   },
   { id: '2', type:'header', title: 'Configuracion', 
     items: [
-      { id: '2.1', type:'item', text: 'Mi cuenta', src: '/account', icon: <UserIcon size="medium" /> },
+      // { id: '2.1', type:'item', text: 'Mi cuenta', src: '/account', icon: <UserIcon size="medium" /> },
       { id: '2.2', type:'item', text: 'Salir', src: '/logout', icon: <SignOutIcon size="medium" />  }
     ]
   },
