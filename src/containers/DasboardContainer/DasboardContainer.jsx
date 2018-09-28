@@ -17,7 +17,8 @@ import * as dashboardActions from '../../store/actions';
 import { TableComponent } from '../../components/';
 
 // Setup moment for Date internationalization and localization
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
+// BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
+const localizer = BigCalendar.momentLocalizer(moment) // or globalizeLocalizer
 
 export class DasboardContainer extends React.Component {
 
@@ -93,9 +94,11 @@ export class DasboardContainer extends React.Component {
                     views={{
                       month: true
                     }}
+                    localizer={localizer}
                     startAccessor='startDateTime'
                     endAccessor='endDateTime'
                     titleAccessor="name"
+                    messages={{next:"Siguiente",previous:"Atrás",today:"Hoy"}}
                     defaultDate={moment().toDate()} />
                   {this.props.filteredLoading && (<div className="loading-container b-40 d-flex align-items-center justify-content-center">
                     <div className="loading">
