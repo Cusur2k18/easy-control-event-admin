@@ -325,15 +325,16 @@ export class EventsContainer extends React.Component {
 
   onSuccessCreateEvent = () => {
     this.props.onSuccessUpsert()
+    this.reloadForm()
     this.props.history.replace('/events')
   }
 
-  cancelEdit = () => {
+  reloadForm = () => {
     this.setState({
       activeView: 'table',
       isShow: false,
       isEdit: false,
-      isCreate:false,
+      isCreate: false,
       form: {
         controls: {
           name: {
@@ -502,7 +503,7 @@ export class EventsContainer extends React.Component {
           imageClick={this.onOpenImageModal}
           validForm={this.state.validForm}
           isEditing={this.state.isEdit}
-          cancel={this.cancelEdit}/>
+          cancel={this.reloadForm}/>
       );
       gridSelector = null;
     }

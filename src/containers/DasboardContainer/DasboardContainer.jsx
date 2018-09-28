@@ -29,6 +29,10 @@ export class DasboardContainer extends React.Component {
     this.props.onGetLatestEvents();
   }
 
+  handleClickElement = (event) => {
+    this.props.history.push(`/events/${event.uuid}`);
+  }
+
   render() {
     
     return (
@@ -47,6 +51,7 @@ export class DasboardContainer extends React.Component {
                       <TableComponent 
                         hoverable
                         borderless
+                        click={this.handleClickElement}
                         loading={this.props.todayLoading}
                         items={this.props.todayEvents || []}
                       />
@@ -65,6 +70,7 @@ export class DasboardContainer extends React.Component {
                       <TableComponent 
                         hoverable
                         borderless
+                        click={this.handleClickElement}
                         loading={this.props.latestLoading}
                         items={this.props.latestEvents || []}
                       />
