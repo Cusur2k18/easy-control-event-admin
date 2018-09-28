@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import AddIcon from '@atlaskit/icon/glyph/add-circle';
 import Button from '@atlaskit/button';
+import Simplert from 'react-simplert';
 
 import { 
   ConfigRow, 
@@ -21,11 +22,12 @@ export class AdminContainer extends React.Component {
   state = {
     currentView: 'root',
     selectedUser: false,
-    isCreatePeople: false
+    isCreatePeople: false,
+    showAlert: false
   }
 
-  handleClickItem = (url) => {
-    this.props.history.push(url);
+  handleClickItem = () => {
+    this.setState({ showAlert: true })
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -131,6 +133,14 @@ export class AdminContainer extends React.Component {
             <h2><SettingsIcon size="large" /> { this.props.match.params.segment && (<React.Fragment><span> > </span><SettingsIcon size="large" /></React.Fragment>) }</h2>
             <hr/>
           </div>
+
+          <Simplert 
+            showSimplert={this.state.showAlert}
+            type="warning"
+            title="Opps!"
+            message="Seguimos trabajando en la plataforma"
+            onClose={() => { this.setState({ showAlert: false }) }}
+          />
 
           <div className="col-sm-12">
             {content}

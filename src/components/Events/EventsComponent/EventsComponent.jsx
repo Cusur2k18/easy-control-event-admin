@@ -33,7 +33,7 @@ export default (props) => {
   )
 
   if (props.activeView === 'grid') {
-    contentView = <CardComponent elements="5"/>
+    contentView = <CardComponent elements={props.events} />
   }
 
   return contentView
